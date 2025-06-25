@@ -3,17 +3,25 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 // ES Modules fix for __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001; // Use Render's provided PORT
 
 // Middleware
 app.use(cors({
- origin: ['http://localhost:5173', 'https://dosad.netlify.app'], // Replace with your Vite frontend URL
+  origin: [
+    'http://localhost:5173', 
+    'https://dosad.netlify.app', // Your Netlify frontend URL
+    'https://your-app-name.netlify.app' // Replace with your actual Netlify URL
+  ],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
 }));
@@ -90,7 +98,6 @@ app.post('/api/contacts', (req, res) => {
       status: 'unread'
     };
 
-    // Basic validation
     if (!contactData.name || !contactData.email || !contactData.message) {
       return res.status(400).json({ 
         success: false,
@@ -139,10 +146,5 @@ app.get('/api/contacts', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-  console.log(`API Endpoints:`);
-  console.log(`- POST /api/orders`);
-  console.log(`- POST /api/contacts`);
-  console.log(`- GET /api/orders (admin)`);
-  console.log(`- GET /api/contacts (admin)`);
+  console.log(`Server running on port ${PORT}`);
 });

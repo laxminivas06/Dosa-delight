@@ -4,15 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-  "dev": "vite --port 5173",
-  "dev-backend": "nodemon --watch ./server.js --watch ./data server.js",
-  "dev-all": "concurrently -n \"FRONTEND,BACKEND\" -c \"blue.bold,green.bold\" \"npm run dev\" \"npm run dev-backend\"",
-  "build": "vite build",
-  "preview": "vite preview --port 4173",
-  "start": "node server.js",
-  "start-production": "npm run build && npm run start",
-  "kill-port": "kill-port 3001 5173 5174 5175 5176 5177 5178"
-},
+    "dev": "vite --port 5173",
+    "dev-backend": "nodemon --watch ./server.js --watch ./data server.js",
+    "dev-all": "concurrently -n \"FRONTEND,BACKEND\" -c \"blue.bold,green.bold\" \"npm run dev\" \"npm run dev-backend\"",
+    "build": "vite build",
+    "preview": "vite preview --port 4173",
+    "start": "node server.js",
+    "start-production": "npm run build && npm run start",
+    "kill-port": "kill-port 3001 5173 5174 5175 5176 5177 5178"
+  },
   "dependencies": {
     "@emailjs/browser": "^4.3.3",
     "cors": "^2.8.5",
