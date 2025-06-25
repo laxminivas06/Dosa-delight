@@ -13,7 +13,7 @@ const PORT = 3001;
 
 // Middleware
 app.use(cors({
- origin: ['http://localhost:5173', 'https://your-production-url.com'], // Replace with your Vite frontend URL
+ origin: ['http://localhost:5173', 'https://dosad.netlify.app'], // Replace with your Vite frontend URL
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
 }));
