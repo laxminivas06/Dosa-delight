@@ -13,14 +13,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 3001; // Use Render's provided PORT
+const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors({
   origin: [
     'http://localhost:5173', 
-    'https://dosad.netlify.app', // Your Netlify frontend URL
-    'https://your-app-name.netlify.app' // Replace with your actual Netlify URL
+    'https://dosad.netlify.app', // Your Netlify URL
+    'https://dosad-backend.onrender.com' // Your Render backend URL
   ],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
