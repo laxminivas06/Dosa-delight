@@ -1,0 +1,67 @@
+[
+  {
+    "orderId": "DO1750779299507",
+    "customerDetails": {
+      "name": "Laxmi Nivas Morishetty",
+      "email": "laxminivasmorishetty143@gmail.com",
+      "phone": "09059160424",
+      "address": "Rainbow Vistas, IDL Road",
+      "notes": "wddw"
+    },
+    "items": [
+      {
+        "id": "Desserts-Gulab Jamun",
+        "name": "Gulab Jamun",
+        "price": "₹80",
+        "description": "Soft milk dumplings in sugar syrup",
+        "category": "Desserts",
+        "isVeg": true,
+        "quantity": 1
+      },
+      {
+        "id": "Desserts-Rasmalai",
+        "name": "Rasmalai",
+        "price": "₹100",
+        "description": "Spongy cottage cheese in flavored milk",
+        "category": "Desserts",
+        "isVeg": true,
+        "quantity": 1
+      }
+    ],
+    "total": 180,
+    "date": "2025-06-24T15:34:59.507Z"
+  },
+  {
+    "orderId": "DO1750783529341",
+    "customerDetails": {
+      "name": "Morishetty Rajesh",
+      "email": "alex@example.com",
+      "phone": "09059160424",
+      "address": "Rainbow Vistas, IDL Road",
+      "notes": "efwef"
+    },
+    "items": [
+      {
+        "id": "Dosas (Signature)-Mysore Masala Dosa",
+        "name": "Mysore Masala Dosa",
+        "price": "₹170",
+        "description": "Spicy red chutney with potato masala",
+        "category": "Dosas (Signature)",
+        "isVeg": true,
+        "isSpicy": true,
+        "quantity": 1
+      },
+      {
+        "id": "Dosas (Signature)-Cheese Dosa",
+        "name": "Cheese Dosa",
+        "price": "₹200",
+        "description": "Crispy dosa loaded with cheese",
+        "category": "Dosas (Signature)",
+        "isVeg": true,
+        "quantity": 1
+      }
+    ],
+    "total": 370,
+    "date": "2025-06-24T16:45:29.341Z"
+  }
+]
