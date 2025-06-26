@@ -56,8 +56,8 @@ const handleSubmit = (e: React.FormEvent) => {
     {
       icon: MapPin,
       title: 'Visit Us',
-      details: ['GO6/31, LASSO ROAD, GREGORY HILLS, NSW, 2557'],
-      action: 'https://maps.app.goo.gl/wjRLMjFajMz7bEr17'
+      details: ['48 station street, Harris park, NSW 2150'],
+      action: 'https://maps.app.goo.gl/F4JYisPix85r4hqe7'
     },
     {
       icon: Clock,
@@ -379,7 +379,7 @@ const handleSubmit = (e: React.FormEvent) => {
               className="rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg"
             >
               <a 
-                href="https://maps.app.goo.gl/wjRLMjFajMz7bEr17" 
+                href="https://maps.app.goo.gl/F4JYisPix85r4hqe7" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="h-48 sm:h-64 w-full flex items-center justify-center"

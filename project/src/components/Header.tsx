@@ -32,7 +32,7 @@ const Header: React.FC = () => {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-1">
               <MapPin className="w-4 h-4" />
-              <span className="hidden sm:inline">GO6/31, LASSO ROAD, GREGORY HILLS, NSW, 2557</span>
+              <span className="hidden sm:inline">48 station street, Harris park, NSW 2150</span>
               <span className="sm:hidden">Sydney, Australia</span>
             </div>
             <div className="flex items-center space-x-1">
