@@ -8,15 +8,10 @@ import Menu from './components/Menu';
 import Gallery from './components/Gallery';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import AdminLogin from './components/AdminLogin';
-import AdminDashboard from './components/AdminDashboard';
 import Testimonials from './components/Testimonials';
-
-
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
-  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -34,14 +29,6 @@ function App() {
   }, []);
 
   const renderPage = () => {
-    if (currentPage === 'admin') {
-      return isAdmin ? (
-        <AdminDashboard onLogout={() => setIsAdmin(false)} />
-      ) : (
-        <AdminLogin onLogin={() => setIsAdmin(true)} />
-      );
-    }
-
     switch(currentPage) {
       case 'home':
         return (
@@ -73,15 +60,13 @@ function App() {
             <Contact />
           </>
         );
-
-        case 'testimonials':
+      case 'testimonials':
         return (
           <>
             <Testimonials />
             <Contact />
           </>
         );
-
       case 'contact':
         return <Contact />;
       default:
@@ -97,17 +82,15 @@ function App() {
 
   return (
     <ThemeProvider>
-    <CartProvider>
-      <div className="App">
-        {currentPage !== 'admin' && <Header />}
-        {renderPage()}
-        {currentPage !== 'admin' && <Footer />}
-       
-      </div>
-    </CartProvider>
-  </ThemeProvider>
+      <CartProvider>
+        <div className="App">
+          <Header />
+          {renderPage()}
+          <Footer />
+        </div>
+      </CartProvider>
+    </ThemeProvider>
   );
 }
 
 export default App;
-
