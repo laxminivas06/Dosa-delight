@@ -6,14 +6,16 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
-      external: ['react-intersection-observer'], // Explicitly mark as external
+      external: [], // Empty array ensures all dependencies are bundled
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'pdf-lib': ['jspdf', 'html2canvas'],
-          'xlsx': ['xlsx'],
-          'framer-motion': ['framer-motion'],
-          'intersection-observer': ['react-intersection-observer'] // Add to chunks
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react')) return 'react-vendor';
+            if (id.includes('jspdf') || id.includes('html2canvas')) return 'pdf-lib';
+            if (id.includes('xlsx')) return 'xlsx';
+            if (id.includes('framer-motion')) return 'framer-motion';
+            return 'vendor';
+          }
         }
       }
     }
