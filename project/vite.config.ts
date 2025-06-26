@@ -4,21 +4,23 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   build: {
-    chunkSizeWarningLimit: 1000, // Increase limit if needed
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
+      external: ['react-intersection-observer'], // Explicitly mark as external
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
           'pdf-lib': ['jspdf', 'html2canvas'],
           'xlsx': ['xlsx'],
-          'framer-motion': ['framer-motion'] // Add framer-motion to manual chunks
+          'framer-motion': ['framer-motion'],
+          'intersection-observer': ['react-intersection-observer'] // Add to chunks
         }
       }
     }
   },
   server: {
     port: 5173,
-    strictPort: true // Don't try other ports
+    strictPort: true
   },
   preview: {
     port: 4173,
