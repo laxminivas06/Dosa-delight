@@ -43,7 +43,7 @@ const Header: React.FC = () => {
           </div>
           <div className="flex items-center space-x-1">
             <Phone className="w-4 h-4" />
-            <span className="hidden sm:inline"> +61 420 774 951</span>
+            <span className="hidden sm:inline">61 406 969 996</span>
             <span className="sm:hidden">Call</span>
           </div>
         </div>
@@ -75,7 +75,7 @@ const Header: React.FC = () => {
                   scale: [1, 1.1, 1]
                 }}
                 transition={{
-                  duration: 100000000,
+                  duration: 10000000000,
                   repeat: Infinity,
                   repeatType: 'reverse'
                 }}

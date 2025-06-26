@@ -63,14 +63,14 @@ const Contact: React.FC = () => {
     {
       icon: Phone,
       title: 'Call Us',
-      details: ['+61 420 774 951'],
-      action: 'tel:+919876543210'
+      details: ['+61 406 969 996'],
+      action: 'tel:+61406969996'
     },
     {
       icon: Mail,
       title: 'Email Us',
-      details: ['dosadelight48@gmail.com'],
-      action: 'mailto:info@dosadelight.com'
+      details: ['dosadelightarrispark@gmail.com'],
+      action: 'mailto:dosadelightarrispark@gmail.com'
     },
     {
       icon: MapPin,

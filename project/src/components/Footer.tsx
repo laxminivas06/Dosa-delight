@@ -12,6 +12,7 @@ const Footer: React.FC = () => {
     { name: 'About', href: '#about' },
     { name: 'Menu', href: '#menu' },
     { name: 'Gallery', href: '#gallery' },
+    { name: 'Testimonials', href: '#testimonials' },
     { name: 'Contact', href: '#contact' }
   ];
 
@@ -50,7 +51,7 @@ const Footer: React.FC = () => {
         ))}
       </div>
 
-      {/* Developer Credits - Moved to top */}
+      {/* Developer Credits */}
       <div className="relative z-10">
         <div className="flex justify-center pt-8">
           <div className={`p-4 sm:p-6 rounded-xl mx-4 ${
@@ -95,14 +96,12 @@ const Footer: React.FC = () => {
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <div className="flex flex-col items-center md:items-start md:flex-row md:space-x-3 mb-6">
-              {/* Logo Animation */}
               <motion.div
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, type: 'spring' }}
                 className="mb-4 md:mb-8 flex flex-col items-center"
               >
-                {/* Animated circle */}
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
                   mode === 'lovable'
                     ? 'bg-gradient-to-br from-pink-400 to-purple-500'
@@ -118,19 +117,18 @@ const Footer: React.FC = () => {
                     scale: [1, 1.1, 1]
                   }}
                   transition={{
-                    duration: 10000,
+                    duration: 10,
                     repeat: Infinity,
                     repeatType: 'reverse'
                   }}
                 />
                 
-                {/* Title */}
                 <h3 className="text-2xl font-bold text-white mt-4 md:mt-0 md:ml-4">DosaDelight</h3>
               </motion.div>
             </div>
             
             <p className="text-gray-300 text-base md:text-lg mb-6 leading-relaxed">
-              Dosa Delight celebrates the rich flavors of South India with a strong foundation in Telugu culinary traditions. Known for our authentic Andhra-style dosas and bold chutneys, we blend time-honored recipes with a modern touch. Our ingredients are thoughtfully sourced—fiery Guntur chillies, fragrant curry leaves, and stone-ground idli rava—while our batters are fermented in traditional clay pots for unmatched flavor. From the tangy Gongura Dosa to the buttery Benne Dosa, every dish reflects the soulful diversity of southern cuisine, offering a warm, home-style experience in every bite.
+              Dosa Delight celebrates the rich flavors of South India with a strong foundation in Telugu culinary traditions. Known for our authentic Andhra-style dosas and bold chutneys, we blend time-honored recipes with a modern touch.
             </p>
             
             <div className="flex justify-center md:justify-start items-center space-x-2 text-gray-300">
@@ -140,7 +138,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick Links with Testimonials */}
           <div>
             <h4 className="text-white font-semibold text-lg mb-6">Quick Links</h4>
             <ul className="space-y-3">
@@ -163,45 +161,53 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-semibold text-lg mb-6">Get In Touch</h4>
             <div className="space-y-4">
-              <div className="flex items-center space-x-3">
+              <a 
+                href="tel:+61406969996" 
+                className="flex items-center space-x-3 hover:text-white transition-colors duration-300"
+              >
                 <Phone className="w-5 h-5 text-gray-400" />
-                <span className="text-gray-300">+61 420 774 951</span>
-              </div>
-              <div className="flex items-center space-x-3">
+                <span className="text-gray-300">+61 406 969 996</span>
+              </a>
+              
+              <a 
+                href="mailto:dosadelightarrispark@gmail.com" 
+                className="flex items-center space-x-3 hover:text-white transition-colors duration-300"
+              >
                 <Mail className="w-5 h-5 text-gray-400" />
-                <span className="text-gray-300">dosadelight48@gmail.com</span>
-              </div>
-              <div className="flex items-start space-x-3">
+                <span className="text-gray-300">dosadelightarrispark@gmail.com</span>
+              </a>
+              
+              <a 
+                href="https://www.google.com/maps/search/?api=1&query=GO6/31+LASSO+ROAD+GREGORY+HILLS+NSW+2557" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-start space-x-3 hover:text-white transition-colors duration-300"
+              >
                 <MapPin className="w-5 h-5 text-gray-400 mt-1" />
                 <div className="text-gray-300">
                   <p>GO6/31, LASSO ROAD,</p>
                   <p>GREGORY HILLS, NSW, 2557</p>
                 </div>
-              </div>
+              </a>
             </div>
 
-            <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
-             
-
-              {/* Social Links */}
-              <div>
-                <h5 className="text-white font-medium mb-3">Follow Us</h5>
-                <div className="flex space-x-3">
-                  {socialLinks.map((social) => (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
-                        mode === 'lovable'
-                          ? 'bg-pink-800 hover:bg-pink-700 text-pink-300'
-                          : 'bg-orange-800 hover:bg-orange-700 text-orange-300'
-                      }`}
-                      aria-label={social.label}
-                    >
-                      <social.icon className="w-5 h-5" />
-                    </a>
-                  ))}
-                </div>
+            <div className="mt-6">
+              <h5 className="text-white font-medium mb-3">Follow Us</h5>
+              <div className="flex space-x-3">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
+                      mode === 'lovable'
+                        ? 'bg-pink-800 hover:bg-pink-700 text-pink-300'
+                        : 'bg-orange-800 hover:bg-orange-700 text-orange-300'
+                    }`}
+                    aria-label={social.label}
+                  >
+                    <social.icon className="w-5 h-5" />
+                  </a>
+                ))}
               </div>
             </div>
           </div>
@@ -213,16 +219,16 @@ const Footer: React.FC = () => {
         } pt-8`}>
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-white text-sm mb-4 md:mb-0 text-center md:text-left">
-              © {currentYear} DosaDelight. All rights reserved. Crafted with passion for authentic flavors.
+              © {currentYear} DosaDelight. All rights reserved.
             </p>
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
-              <a href="#" className="text-white hover:text-white transition-colors">
+              <a href="#" className="text-white hover:underline transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="text-white hover:text-white transition-colors">
+              <a href="#" className="text-white hover:underline transition-colors">
                 Terms of Service
               </a>
-              <a href="#" className="text-white hover:text-white transition-colors">
+              <a href="#" className="text-white hover:underline transition-colors">
                 Cookie Policy
               </a>
             </div>
