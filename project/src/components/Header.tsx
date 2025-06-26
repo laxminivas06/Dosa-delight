@@ -17,7 +17,7 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = ['Home', 'About', 'Menu', 'Gallery', 'Testimonials', 'Contact'];
+  const navItems = ['Home', 'About', 'Menu', 'Gallery',  'Contact'];
 
   const navigateToPage = (page: string) => {
     window.location.hash = page.toLowerCase();

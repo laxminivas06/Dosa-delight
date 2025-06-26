@@ -35,7 +35,7 @@ function App() {
           <>
             <Hero />
             <Gallery />
-            <Testimonials/>
+            
             <Contact />
           </>
         );
@@ -60,13 +60,7 @@ function App() {
             <Contact />
           </>
         );
-      case 'testimonials':
-        return (
-          <>
-            <Testimonials />
-            <Contact />
-          </>
-        );
+      
       case 'contact':
         return <Contact />;
       default:
