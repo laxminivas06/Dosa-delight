@@ -87,7 +87,7 @@ const Hero: React.FC = () => {
           className="mb-4 sm:mb-6 md:mb-8 flex justify-center"
         >
           <motion.img
-            src="https://i.postimg.cc/W470Rm5s/Dosa.png"
+            src="https://i.postimg.cc/VvgSZGPp/dd.png"
             alt="DosaDelight Logo"
             className="w-48 h-48 sm:w-50 sm:h-50 md:w-64 md:h-64 lg:w-150 lg:h-150"
             animate={{

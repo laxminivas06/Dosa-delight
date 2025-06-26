@@ -67,7 +67,7 @@ const Header: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             >
               <motion.img
-                src="https://i.postimg.cc/W470Rm5s/Dosa.png"
+                src="https://i.postimg.cc/VvgSZGPp/dd.png"
                 alt="DosaDelight Logo"
                 className="w-20 h-20 md:w-42 md:h-42"
                 animate={{

@@ -2161,9 +2161,9 @@ const Menu: React.FC = () => {
         className="mb-8 flex justify-center"
       >
         <motion.img
-          src="https://i.postimg.cc/W470Rm5s/Dosa.png"
+          src="https://i.postimg.cc/VvgSZGPp/dd.png"
           alt="DosaDelight Logo"
-          className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64"
+          className="w-48 h-48 sm:w-48 sm:h-48 md:w-64 md:h-64"
           animate={{
             rotate: [0, 10, -10, 0],
             scale: [1, 1.1, 1]
