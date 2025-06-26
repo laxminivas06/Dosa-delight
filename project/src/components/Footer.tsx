@@ -185,8 +185,8 @@ const Footer: React.FC = () => {
               >
                 <MapPin className="w-5 h-5 text-gray-400 mt-1" />
                 <div className="text-gray-300">
-                  <p>GO6/31, LASSO ROAD,</p>
-                  <p>GREGORY HILLS, NSW, 2557</p>
+                  <p>48 station street, </p>
+                  <p>Harris park, NSW 2150</p>
                 </div>
               </a>
             </div>
