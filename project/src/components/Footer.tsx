@@ -134,7 +134,7 @@ const Footer: React.FC = () => {
             <div className="flex justify-center md:justify-start items-center space-x-2 text-gray-300">
               <span>Made with</span>
               <Heart className="w-4 h-4 text-red-400 animate-pulse" />
-              <span>in India</span>
+              <span>in Australia</span>
             </div>
           </div>
 
