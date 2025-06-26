@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChefHat, Star, Flame, Leaf, X } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { motion } from 'framer-motion';
+
 interface MenuItem {
   name: string;
   price: string;
@@ -15,6 +16,7 @@ interface MenuItem {
 interface MenuCategory {
   name: string;
   icon: string;
+  image: string;
   subcategories?: string[];
   items: MenuItem[];
 }
@@ -26,22 +28,11 @@ const Menu: React.FC = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [activeSubcategory, setActiveSubcategory] = useState<string>('All');
 
-  // Random food images for decoration
-  const decorativeImages = [
-    'https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/2788792/pexels-photo-2788792.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/1199957/pexels-photo-1199957.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/1833349/pexels-photo-1833349.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/2696064/pexels-photo-2696064.jpeg?auto=compress&cs=tinysrgb&w=400'
-  ];
-
-  const menuCategories: MenuCategory[] = [
+   const menuCategories: MenuCategory[] = [
    {
   "name": "Snacks & Chaats",
   "icon": "🥨",
+   "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
   "items": [
     {
       "name": "Samosa",
@@ -128,6 +119,7 @@ const Menu: React.FC = () => {
     {
       name: 'Soup\'s',
       icon: '🍲',
+       "image": "https://t3.ftcdn.net/jpg/02/45/00/72/360_F_245007231_vDwC9ceDNtjUCA5YDuq6mPDRG5ocPg0B.jpg",
       items: [
         { name: 'Sweet Corn (Veg)', price: '$5.99', description: 'Creamy sweet corn soup', isVeg: true },
         { name: 'Sweet Corn (Chicken)', price: '$6.99', description: 'Creamy sweet corn soup with chicken' },
@@ -138,6 +130,7 @@ const Menu: React.FC = () => {
     {
       name: 'Kid\'s Menu',
       icon: '👶',
+       "image": "https://www.cubesnjuliennes.com/wp-content/uploads/2025/05/Homemade-Chicken-Nuggets-Recipe.jpg",
       items: [
         { name: 'Chicken Nuggets', price: '$10.99', description: 'Crispy chicken nuggets with fries' },
         { name: 'French Fries', price: '$6.99', description: 'Crispy golden fries', isVeg: true },
@@ -148,6 +141,7 @@ const Menu: React.FC = () => {
     {
       name: 'Idli and Vada',
       icon: '🥣',
+       "image": "https://t3.ftcdn.net/jpg/05/33/82/34/360_F_533823407_h0wVzQub7h3b6OZVWE44BPf5E6SHndxI.jpg",
       items: [
         { name: 'Idly', price: '$9.99', description: 'Steamed rice cakes', isVeg: true },
         { name: 'Vada', price: '$9.99', description: 'Fried lentil donuts', isVeg: true },
@@ -161,6 +155,7 @@ const Menu: React.FC = () => {
     {
       name: 'Tandoor',
       icon: '🔥',
+       "image": "https://media.istockphoto.com/id/995903748/photo/smoked-and-spicy-tandoori-chicken-grilling-with-smoke.jpg?s=612x612&w=0&k=20&c=xq_apF2Osk5HYFOgBS9crRi1puLozxyGWFuCUV0mhYg=",
       subcategories: ['Veg', 'Non-Veg'],
       items: [
         { name: 'Panner Tikka', price: '$19.99', description: 'Cubes of fresh cottage cheese marinated with spices and capsicum and onion and cooked in tandoor', subcategory: 'Veg', isVeg: true },
@@ -177,10 +172,11 @@ const Menu: React.FC = () => {
       ]
     },
     {
-  "name": "Indo-Chinese",
-  "icon": "🥢",
-  "subcategories": ["Veg Starters", "Sea Food Starters", "Non-Veg Starters"],
-  "items": [
+  name: "Indo-Chinese",
+  icon: "🥢",
+   image: "https://kohinoor-joy.com/wp-content/uploads/2020/01/indo-chinese-food.jpg",
+  subcategories: ["Veg Starters", "Sea Food Starters", "Non-Veg Starters"],
+  items: [
     {
       "name": "Manchurian (Veg)",
       "price": "$19.99",
@@ -546,6 +542,7 @@ const Menu: React.FC = () => {
    {
   "name": "Dosa",
   "icon": "🥞",
+   "image": "https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?cs=srgb&dl=pexels-saveurssecretes-5560763.jpg&fm=jpg",
   "subcategories": ["Veg", "Non-Veg", "70 MM's Dosa", "Ravva Dosa", "Cheese Series"],
   "items": [
     {
@@ -814,6 +811,7 @@ const Menu: React.FC = () => {
     {
   "name": "Noodles/Fried Rice",
   "icon": "🍜",
+   "image": "https://png.pngtree.com/thumb_back/fh260/background/20220318/pngtree-food-photography-fried-rice-noodles-with-eggs-image_1034304.jpg",
   "subcategories": ["Veg", "Non-Veg"],
   "items": [
     {
@@ -993,6 +991,7 @@ const Menu: React.FC = () => {
   {
     "name": "Veg Curries",
     "icon": "🥘",
+     "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgF-F2inbVwiAfJQPVLHLPsI0Q3zwg_01dwNUlI5lzkD61vtvtsw2FoV8vJhZhx_jg0eK6Ibt8bcLzb5NiS-OTVCct-7loF4NrZ9A536cqGc2triqyaCrdNopeAWyUj9LrDNL3J0IWxGE3x/s640/editted--1-1.jpg",
     "items": [
       {
         "name": "Dal Makhani",
@@ -1126,6 +1125,7 @@ const Menu: React.FC = () => {
     {
     "name": "Sea Food Curries",
     "icon": "🐟",
+     "image": "https://media.istockphoto.com/id/1295772368/photo/macher-jhol-in-black-bowl-on-dark-slate-table-top-indian-cuisine-bengali-fish-curry-asian.jpg?s=612x612&w=0&k=20&c=3asIIURIgisLwXAijZnmNY3p2EWEZEHzByjk7ke9xZk=",
     "items": [
       {
         "name": "Fish / Prawn Curry",
@@ -1156,6 +1156,7 @@ const Menu: React.FC = () => {
     {
   "name": "Non-Veg Curries",
   "icon": "🍗",
+   "image": "https://media.istockphoto.com/id/579767430/photo/chicken-tikka-masala.jpg?s=612x612&w=0&k=20&c=EjeRH4r3w9qQ2WELp5qkqkUh1HbJJwRcFNNv1suOtvM=",
   "items": [
     {
       "name": "Butter Chicken",
@@ -1258,6 +1259,7 @@ const Menu: React.FC = () => {
     {
   "name": "Breads",
   "icon": "🫓",
+   "image": "https://media.istockphoto.com/id/1150376593/photo/bread-tandoori-indian-cuisine.jpg?s=612x612&w=0&k=20&c=GGT5LN7G4zLhJTEnP_KcyvYuayi8f1nJcvQwvmj0rCM=",
   "items": [
     {
       "name": "Plain Naan",
@@ -1354,6 +1356,7 @@ const Menu: React.FC = () => {
     {
   "name": "Rice",
   "icon": "🍚",
+   "image": "https://www.indianhealthyrecipes.com/wp-content/uploads/2022/12/jeera-rice-recipe.webp",
   "items": [
     {
       "name": "Plain Rice",
@@ -1402,6 +1405,7 @@ const Menu: React.FC = () => {
 {
   "name": "Sides",
    "icon": "🍞",
+    "image": "https://media.istockphoto.com/id/1263817605/photo/masala-papad-or-spicy-papadum-is-an-indian-or-asian-vegetarian-crispy-food-starter-in.jpg?s=612x612&w=0&k=20&c=leHxfC-oTlHAQaT16NmgDIqS_wITa8m-6ZqJvrWjodk=",
   "items": [
     {
       "name": "Papadam",
@@ -1434,6 +1438,7 @@ const Menu: React.FC = () => {
     {
   "name": "Biryani's",
   "icon": "🍛",
+   "image": "https://png.pngtree.com/thumb_back/fh260/background/20240727/pngtree-3d-chicken-kabsa-homemade-arabian-biryani-image_16117957.jpg",
   "subcategories": ["Veg", "Non-Veg", "Special"],
   "items": [
     {
@@ -1714,6 +1719,7 @@ const Menu: React.FC = () => {
     {
       name: 'Desserts',
       icon: '🍮',
+       "image": "https://burst.shopifycdn.com/photos/berry-cheesecake.jpg?width=1000&format=pjpg&exif=0&iptc=0",
       items: [
         { name: 'Rasmalai (3 Pieces)', price: '$9.99', description: 'Spongy cottage cheese in flavored milk', isVeg: true },
         { name: 'Gulab Jamun (2 Pieces)', price: '$9.99', description: 'Soft milk dumplings in sugar syrup', isVeg: true },
@@ -1726,6 +1732,7 @@ const Menu: React.FC = () => {
     {
   "name": "Family/Jumbo",
   "icon": "👨‍👩‍👧‍👦",
+   "image": "https://img.freepik.com/premium-photo/dinner-with-family-friends-large-table-with-lots-food_962751-3533.jpg",
   "subcategories": ["Family", "Jumbo", "Desserts"],
   "items": [
     {
@@ -1921,61 +1928,30 @@ const Menu: React.FC = () => {
     }, 300);
   };
 
-  const getRandomImages = (count: number) => {
-    const shuffled = [...decorativeImages].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
-  };
-
   const CategoryCard: React.FC<{ category: MenuCategory; index: number }> = ({ category, index }) => (
     <div
-      className={`relative p-6 rounded-2xl cursor-pointer transition-all duration-500 transform ${
-        mode === 'lovable'
-          ? 'bg-gradient-to-br from-pink-100 to-purple-100 hover:from-pink-200 hover:to-purple-200 border-2 border-pink-200'
-          : 'bg-gradient-to-br from-orange-100 to-red-100 hover:from-orange-200 hover:to-red-200 border-2 border-orange-200'
-      } hover:scale-105 hover:shadow-xl group`}
+      className="relative rounded-2xl cursor-pointer overflow-hidden group"
       onClick={() => openCategoryPopup(category)}
       style={{ animationDelay: `${index * 0.1}s` }}
     >
-      <div className="text-6xl mb-4 transform group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">
-        {category.icon}
-      </div>
-      
-      <h3 className={`text-xl font-bold mb-2 ${
-        mode === 'lovable' ? 'text-gray-800' : 'text-gray-900'
-      }`}>
-        {category.name}
-      </h3>
-      
-      <p className={`text-sm ${
-        mode === 'lovable' ? 'text-gray-600' : 'text-gray-700'
-      }`}>
-        {category.items.length} delicious options
-        {category.subcategories && ` • ${category.subcategories.length} subcategories`}
-      </p>
-
-      <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={i}
-            className={`absolute animate-float ${
-              mode === 'lovable' ? 'text-pink-400' : 'text-orange-400'
-            }`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 2}s`,
-              animationDuration: '2s'
-            }}
-          >
-            ✨
+      <div className="relative h-64 w-full">
+        <img 
+          src={category.image}
+          alt={category.name}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+          <div className="bg-white/90 px-4 py-2 rounded-full">
+            <h3 className="text-xl font-bold text-gray-800">
+              {category.name}
+            </h3>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );
 
   const MenuPopup: React.FC<{ category: MenuCategory }> = ({ category }) => {
-    const randomImages = getRandomImages(6);
     const popupRef = React.useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -1992,45 +1968,6 @@ const Menu: React.FC = () => {
       <div className={`fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
         isPopupOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}>
-        <div className="hidden lg:block absolute inset-0 pointer-events-none overflow-hidden">
-          <img
-            src={randomImages[0]}
-            alt="Decoration"
-            className="absolute top-10 left-10 w-24 h-24 rounded-full object-cover opacity-20 animate-float"
-            style={{ animationDelay: '0s' }}
-          />
-          <img
-            src={randomImages[1]}
-            alt="Decoration"
-            className="absolute top-20 right-20 w-32 h-32 rounded-2xl object-cover opacity-15 animate-float"
-            style={{ animationDelay: '1s' }}
-          />
-          <img
-            src={randomImages[2]}
-            alt="Decoration"
-            className="absolute bottom-16 left-16 w-28 h-28 rounded-xl object-cover opacity-20 animate-float"
-            style={{ animationDelay: '2s' }}
-          />
-          <img
-            src={randomImages[3]}
-            alt="Decoration"
-            className="absolute bottom-10 right-10 w-20 h-20 rounded-full object-cover opacity-25 animate-float"
-            style={{ animationDelay: '0.5s' }}
-          />
-          <img
-            src={randomImages[4]}
-            alt="Decoration"
-            className="absolute top-1/2 left-4 w-24 h-24 rounded-2xl object-cover opacity-15 animate-float transform -translate-y-1/2"
-            style={{ animationDelay: '1.5s' }}
-          />
-          <img
-            src={randomImages[5]}
-            alt="Decoration"
-            className="absolute top-1/3 right-4 w-28 h-28 rounded-full object-cover opacity-20 animate-float"
-            style={{ animationDelay: '2.5s' }}
-          />
-        </div>
-
         <div 
           ref={popupRef}
           className={`relative w-full max-w-4xl h-[90vh] overflow-hidden rounded-3xl shadow-2xl ${
@@ -2175,7 +2112,6 @@ const Menu: React.FC = () => {
                     </div>
                     
                     <div className="flex items-center justify-between md:flex-col md:items-end gap-3">
-                     
                       <span className={`font-bold text-xl md:text-2xl ${
                         mode === 'lovable' ? 'text-pink-600' : 'text-orange-600'
                       }`}>
@@ -2198,28 +2134,27 @@ const Menu: React.FC = () => {
         ? 'bg-gradient-to-b from-purple-50 to-pink-50'
         : 'bg-gradient-to-b from-white to-gray-50'
     }`}>
-     {/* Logo Animation */}
-             <motion.div
-       initial={{ opacity: 0, y: -50 }}
-       animate={{ opacity: 1, y: 0 }}
-       transition={{ duration: 0.8, type: 'spring' }}
-       className="mb-8 flex justify-center"
-     >
-       <motion.img
-         src="https://i.postimg.cc/W470Rm5s/Dosa.png"
-         alt="DosaDelight Logo"
-        className="w-48 h-48 sm:w-50 sm:h-50 md:w-64 md:h-64 lg:w-150 lg:h-150" // Increased the size
-         animate={{
-           rotate: [0, 10, -10, 0],
-           scale: [1, 1.1, 1]
-         }}
-         transition={{
-           duration: 10000,
-           repeat: Infinity,
-           repeatType: 'reverse'
-         }}
-       />
-     </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, type: 'spring' }}
+        className="mb-8 flex justify-center"
+      >
+        <motion.img
+          src="https://i.postimg.cc/W470Rm5s/Dosa.png"
+          alt="DosaDelight Logo"
+          className="w-48 h-48 sm:w-50 sm:h-50 md:w-64 md:h-64 lg:w-150 lg:h-150"
+          animate={{
+            rotate: [0, 10, -10, 0],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{
+            duration: 10009090909090909090,
+            repeat: 1000000000,
+            repeatType: 'reverse'
+          }}
+        />
+      </motion.div>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <div className={`inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 ${
@@ -2227,8 +2162,6 @@ const Menu: React.FC = () => {
               ? 'bg-pink-100 text-pink-800'
               : 'bg-orange-100 text-orange-800'
           }`}>
-            
-
             Our Menu
           </div>
           
