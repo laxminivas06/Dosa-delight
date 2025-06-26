@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChefHat, Star, Flame, Leaf, X } from 'lucide-react';
+import { ChefHat, Star, Flame, Leaf, X, Hand } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
@@ -27,8 +27,19 @@ const Menu: React.FC = () => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [activeSubcategory, setActiveSubcategory] = useState<string>('All');
+  const [isMobile, setIsMobile] = useState(false);
 
-   const menuCategories: MenuCategory[] = [
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const menuCategories: MenuCategory[] = [
    {
   "name": "Snacks & Chaats",
   "icon": "🥨",
@@ -1913,6 +1924,7 @@ const Menu: React.FC = () => {
     
   ];
 
+
   const openCategoryPopup = (category: MenuCategory) => {
     setSelectedCategory(category);
     setActiveSubcategory('All');
@@ -1929,26 +1941,34 @@ const Menu: React.FC = () => {
   };
 
   const CategoryCard: React.FC<{ category: MenuCategory; index: number }> = ({ category, index }) => (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1 }}
       className="relative rounded-2xl cursor-pointer overflow-hidden group"
       onClick={() => openCategoryPopup(category)}
-      style={{ animationDelay: `${index * 0.1}s` }}
     >
-      <div className="relative h-64 w-full">
+      <div className="relative h-48 sm:h-56 md:h-64 w-full">
         <img 
           src={category.image}
           alt={category.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-          <div className="bg-white/90 px-4 py-2 rounded-full">
-            <h3 className="text-xl font-bold text-gray-800">
+        <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center p-4">
+          <div className="bg-white/90 px-4 py-2 rounded-full mb-2">
+            <h3 className="text-lg sm:text-xl font-bold text-gray-800 text-center">
               {category.name}
             </h3>
           </div>
+          {isMobile && (
+            <div className="flex items-center bg-white/90 px-3 py-1 rounded-full mt-2">
+              <Hand className="w-4 h-4 mr-1" />
+              <span className="text-xs font-medium">Tap to view</span>
+            </div>
+          )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 
   const MenuPopup: React.FC<{ category: MenuCategory }> = ({ category }) => {
@@ -2129,7 +2149,7 @@ const Menu: React.FC = () => {
   };
 
   return (
-    <section id="menu" className={`py-20 ${
+    <section id="menu" className={`py-12 md:py-20 ${
       mode === 'lovable'
         ? 'bg-gradient-to-b from-purple-50 to-pink-50'
         : 'bg-gradient-to-b from-white to-gray-50'
@@ -2143,20 +2163,20 @@ const Menu: React.FC = () => {
         <motion.img
           src="https://i.postimg.cc/W470Rm5s/Dosa.png"
           alt="DosaDelight Logo"
-          className="w-48 h-48 sm:w-50 sm:h-50 md:w-64 md:h-64 lg:w-150 lg:h-150"
+          className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64"
           animate={{
             rotate: [0, 10, -10, 0],
             scale: [1, 1.1, 1]
           }}
           transition={{
-            duration: 10009090909090909090,
-            repeat: 1000000000,
+            duration: 10000,
+            repeat: Infinity,
             repeatType: 'reverse'
           }}
         />
       </motion.div>
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <div className={`inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 ${
             mode === 'lovable'
               ? 'bg-pink-100 text-pink-800'
@@ -2165,7 +2185,7 @@ const Menu: React.FC = () => {
             Our Menu
           </div>
           
-          <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${
+          <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 ${
             mode === 'lovable' ? 'text-gray-800' : 'text-gray-900'
           }`}>
             Flavors That{' '}
@@ -2178,7 +2198,7 @@ const Menu: React.FC = () => {
             </span>
           </h2>
           
-          <p className={`text-lg max-w-2xl mx-auto ${
+          <p className={`text-base md:text-lg max-w-2xl mx-auto ${
             mode === 'lovable' ? 'text-gray-600' : 'text-gray-700'
           }`}>
             Explore our carefully curated menu featuring authentic Indian delicacies, 
@@ -2186,20 +2206,20 @@ const Menu: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
           {menuCategories.map((category: MenuCategory, index: number) => (
             <CategoryCard key={category.name} category={category} index={index} />
           ))}
         </div>
 
-        <div className="text-center mt-16">
-          <div className={`inline-flex items-center space-x-2 px-6 py-3 rounded-full ${
+        <div className="text-center mt-12 md:mt-16">
+          <div className={`inline-flex items-center space-x-2 px-4 py-2 md:px-6 md:py-3 rounded-full ${
             mode === 'lovable'
               ? 'bg-gradient-to-r from-pink-500 to-purple-600'
               : 'bg-gradient-to-r from-orange-500 to-red-600'
           } text-white shadow-lg hover:scale-105 transition-transform duration-300`}>
-            <ChefHat className="w-5 h-5" />
-            <span className="font-medium">Can't decide? Try our Chef's Special Thali!</span>
+            <ChefHat className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="text-sm md:text-base font-medium">Can't decide? Try our Chef's Special Thali!</span>
           </div>
         </div>
       </div>
