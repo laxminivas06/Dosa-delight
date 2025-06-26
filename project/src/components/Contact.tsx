@@ -21,43 +21,15 @@ const Contact: React.FC = () => {
     });
   };
 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  
-  try {
-    const response = await fetch('http://localhost:3001/api/contacts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-
-    if (!response.ok) throw new Error('Failed to submit');
-    
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     setIsSubmitted(true);
     setFormData({ name: '', email: '', phone: '', message: '' });
     
-    // Fallback to localStorage if needed
-    const fallbackContacts = JSON.parse(localStorage.getItem('pendingContacts') || '[]');
-    fallbackContacts.push(formData);
-    localStorage.setItem('pendingContacts', JSON.stringify(fallbackContacts));
-    
-  } catch (error) {
-    console.error('Error submitting contact form:', error);
-    // Fallback to localStorage
-    const fallbackContacts = JSON.parse(localStorage.getItem('pendingContacts') || '[]');
-    fallbackContacts.push(formData);
-    localStorage.setItem('pendingContacts', JSON.stringify(fallbackContacts));
-    
-    setIsSubmitted(true);
-    setFormData({ name: '', email: '', phone: '', message: '' });
-  }
-  
-  setTimeout(() => {
-    setIsSubmitted(false);
-  }, 3000);
-};
+    setTimeout(() => {
+      setIsSubmitted(false);
+    }, 3000);
+  };
 
   const contactInfo = [
     {
@@ -86,7 +58,7 @@ const Contact: React.FC = () => {
     }
   ];
 
-  // Animation variants
+  // Animation variants (same as before)
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -130,7 +102,7 @@ const Contact: React.FC = () => {
     }`}>
 
       {/* Logo Animation */}
-              <motion.div
+      <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, type: 'spring' }}
@@ -139,7 +111,7 @@ const Contact: React.FC = () => {
         <motion.img
           src="https://i.postimg.cc/VvgSZGPp/dd.png"
           alt="DosaDelight Logo"
-          className="w-48 h-48 sm:w-50 sm:h-50 md:w-64 md:h-64 lg:w-150 lg:h-150" // Increased the size
+          className="w-48 h-48 sm:w-50 sm:h-50 md:w-64 md:h-64 lg:w-150 lg:h-150"
           animate={{
             rotate: [0, 10, -10, 0],
             scale: [1, 1.1, 1]
@@ -233,7 +205,21 @@ const Contact: React.FC = () => {
                 </p>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <form 
+                name="contact" 
+                method="POST" 
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                onSubmit={handleSubmit}
+                className="space-y-4 sm:space-y-6"
+              >
+                <input type="hidden" name="form-name" value="contact" />
+                <div hidden>
+                  <label>
+                    Don't fill this out if you're human: <input name="bot-field" />
+                  </label>
+                </div>
+                
                 {[
                   { name: 'name', label: 'Your Name *', type: 'text' },
                   { name: 'email', label: 'Email Address *', type: 'email' },
@@ -328,7 +314,7 @@ const Contact: React.FC = () => {
             )}
           </motion.div>
 
-          {/* Contact Information */}
+          {/* Contact Information (same as before) */}
           <div className="space-y-4 sm:space-y-6">
             {contactInfo.map((info, index) => (
               <motion.div
@@ -376,34 +362,34 @@ const Contact: React.FC = () => {
               </motion.div>
             ))}
 
-            {/* Map - Alternative using your direct link */}
-<motion.div 
-  initial="hidden"
-  animate="visible"
-  variants={itemVariants}
-  className="rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg"
->
-  <a 
-    href="https://maps.app.goo.gl/wjRLMjFajMz7bEr17" 
-    target="_blank" 
-    rel="noopener noreferrer"
-    className="h-48 sm:h-64 w-full flex items-center justify-center"
-  >
-    <div className={`h-full w-full flex items-center justify-center ${
-      mode === 'lovable'
-        ? 'bg-gradient-to-br from-pink-200 to-purple-200'
-        : 'bg-gradient-to-br from-orange-200 to-red-200'
-    }`}>
-      <div className="text-center">
-        <MapPin className={`w-8 sm:w-12 h-8 sm:h-12 mx-auto mb-2 ${
-          mode === 'lovable' ? 'text-pink-600' : 'text-orange-600'
-        }`} />
-        <p className="text-gray-700 font-medium text-sm sm:text-base">View on Google Maps</p>
-        <p className="text-xs sm:text-sm text-gray-600">Click to open</p>
-      </div>
-    </div>
-  </a>
-</motion.div>
+            {/* Map */}
+            <motion.div 
+              initial="hidden"
+              animate="visible"
+              variants={itemVariants}
+              className="rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg"
+            >
+              <a 
+                href="https://maps.app.goo.gl/wjRLMjFajMz7bEr17" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="h-48 sm:h-64 w-full flex items-center justify-center"
+              >
+                <div className={`h-full w-full flex items-center justify-center ${
+                  mode === 'lovable'
+                    ? 'bg-gradient-to-br from-pink-200 to-purple-200'
+                    : 'bg-gradient-to-br from-orange-200 to-red-200'
+                }`}>
+                  <div className="text-center">
+                    <MapPin className={`w-8 sm:w-12 h-8 sm:h-12 mx-auto mb-2 ${
+                      mode === 'lovable' ? 'text-pink-600' : 'text-orange-600'
+                    }`} />
+                    <p className="text-gray-700 font-medium text-sm sm:text-base">View on Google Maps</p>
+                    <p className="text-xs sm:text-sm text-gray-600">Click to open</p>
+                  </div>
+                </div>
+              </a>
+            </motion.div>
           </div>
         </div>
       </div>
