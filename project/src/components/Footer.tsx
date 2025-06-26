@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Phone, Mail, MapPin, Instagram, Lock } from 'lucide-react';
+import { Heart, Phone, Mail, MapPin, Instagram } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
@@ -181,18 +181,7 @@ const Footer: React.FC = () => {
             </div>
 
             <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
-              <a
-                href="#admin"
-                className={`p-2 rounded-full transition-all duration-300 hover:scale-110 w-fit ${
-                  mode === 'lovable'
-                    ? 'bg-pink-800 hover:bg-pink-700 text-pink-300'
-                    : 'bg-orange-800 hover:bg-orange-700 text-orange-300'
-                }`}
-                title="Admin Login"
-                aria-label="Admin Login"
-              >
-                <Lock className="w-5 h-5" />
-              </a>
+             
 
               {/* Social Links */}
               <div>
