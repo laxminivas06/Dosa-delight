@@ -117,7 +117,7 @@ const Footer: React.FC = () => {
                     scale: [1, 1.1, 1]
                   }}
                   transition={{
-                    duration: 10,
+                    duration: 1000909090909090,
                     repeat: Infinity,
                     repeatType: 'reverse'
                   }}
