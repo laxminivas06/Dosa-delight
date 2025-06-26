@@ -10,7 +10,8 @@ export default defineConfig({
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
           'pdf-lib': ['jspdf', 'html2canvas'],
-          'xlsx': ['xlsx']
+          'xlsx': ['xlsx'],
+          'framer-motion': ['framer-motion'] // Add framer-motion to manual chunks
         }
       }
     }
