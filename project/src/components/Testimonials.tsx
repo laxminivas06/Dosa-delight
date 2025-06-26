@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { motion } from 'framer-motion';
 
 interface Testimonial {
   name: string;
   location: string;
   rating: number;
   comment: string;
-  avatar: string;
-  date: string;
+  
 }
 
 const Testimonials: React.FC = () => {
@@ -19,43 +19,34 @@ const Testimonials: React.FC = () => {
   const testimonials: Testimonial[] = [
     {
       name: 'Priya Sharma',
-      location: 'Mumbai',
-      rating: 5,
-      comment: 'The best dosas I\'ve ever had! The authentic flavors reminded me of my grandmother\'s cooking. The service was exceptional and the ambiance was perfect for a family dinner.',
-      avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150',
-      date: '2 days ago'
+      location: 'Melbourne',
+      rating: 4.8,
+      comment: 'The best dosas I\'ve ever had! The authentic flavors reminded me of my grandmother\'s cooking. The service was exceptional and the ambiance was perfect for a family dinner.'
+ 
     },
     {
-      name: 'Rajesh Kumar',
-      location: 'Bangalore',
-      rating: 5,
-      comment: 'DosaDelight lives up to its name! Every bite was a delight. The Mysore Masala Dosa was crispy and flavorful. Will definitely visit again when I\'m in town.',
-      avatar: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150',
-      date: '1 week ago'
+      name: 'Rajesh',
+      location: 'NSW,2147',
+      rating: 4.2,
+      comment: 'DosaDelight lives up to its name! Every bite was a delight. The Mysore Masala Dosa was crispy and flavorful. Will definitely visit again when I\'m in town.'
     },
     {
-      name: 'Meera Patel',
-      location: 'Chennai',
+      name: 'Michelle',
+      location: 'Sydney',
       rating: 5,
-      comment: 'As a South Indian food enthusiast, I can confidently say this place serves authentic cuisine. The sambar and chutneys are made to perfection. Highly recommended!',
-      avatar: 'https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=150',
-      date: '3 days ago'
+      comment: 'As a South Indian food enthusiast, I can confidently say this place serves authentic cuisine. The sambar and chutneys are made to perfection. Highly recommended!'
     },
     {
-      name: 'Arjun Reddy',
-      location: 'Hyderabad',
-      rating: 4,
-      comment: 'Great food and amazing presentation! The chicken biryani was aromatic and well-spiced. The only reason it\'s not 5 stars is the wait time, but it was worth it.',
-      avatar: 'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=150',
-      date: '5 days ago'
+      name: 'Venkatesh',
+      location: 'Sydney',
+      rating: 4.4,
+      comment: 'Great food and amazing presentation! The chicken biryani was aromatic and well-spiced. The only reason it\'s not 5 stars is the wait time, but it was worth it.'
     },
     {
-      name: 'Lakshmi Iyer',
-      location: 'Kerala',
+      name: 'Andrew Smith',
+      location: 'Melbourne',
       rating: 5,
-      comment: 'The filter coffee here is exactly how my mother makes it! The dosas are crispy and the coconut chutney is divine. This place feels like home.',
-      avatar: 'https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=150',
-      date: '1 day ago'
+      comment: 'The dosas are crispy and the coconut chutney is divine. This place feels like home.'
     }
   ];
 
@@ -93,25 +84,35 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section className={`py-20 ${
+    <section id="testimonials" className={`py-20 ${
       mode === 'lovable'
         ? 'bg-gradient-to-b from-purple-50 to-pink-50'
         : 'bg-gradient-to-b from-white to-gray-50'
     }`}>
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className={`inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 ${
-            mode === 'lovable'
-              ? 'bg-pink-100 text-pink-800'
-              : 'bg-orange-100 text-orange-800'
-          }`}>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className={`inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 ${
+              mode === 'lovable'
+                ? 'bg-pink-100 text-pink-800'
+                : 'bg-orange-100 text-orange-800'
+            }`}
+          >
             Testimonials
-          </div>
+          </motion.div>
           
-          <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${
-            mode === 'lovable' ? 'text-gray-800' : 'text-gray-900'
-          }`}>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className={`text-4xl md:text-5xl font-bold mb-6 ${
+              mode === 'lovable' ? 'text-gray-800' : 'text-gray-900'
+            }`}
+          >
             What Our{' '}
             <span className={`${
               mode === 'lovable'
@@ -120,23 +121,33 @@ const Testimonials: React.FC = () => {
             }`}>
               Customers Say
             </span>
-          </h2>
+          </motion.h2>
           
-          <p className={`text-lg max-w-2xl mx-auto ${
-            mode === 'lovable' ? 'text-gray-600' : 'text-gray-700'
-          }`}>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className={`text-lg max-w-2xl mx-auto ${
+              mode === 'lovable' ? 'text-gray-600' : 'text-gray-700'
+            }`}
+          >
             Don't just take our word for it. Here's what food lovers across India 
             are saying about their DosaDelight experience.
-          </p>
+          </motion.p>
         </div>
 
         {/* Main Testimonial Card */}
         <div className="max-w-4xl mx-auto">
-          <div className={`relative p-8 md:p-12 rounded-3xl shadow-2xl transition-all duration-500 ${
-            mode === 'lovable'
-              ? 'bg-white border-2 border-pink-100'
-              : 'bg-white border-2 border-orange-100'
-          }`}>
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className={`relative p-8 md:p-12 rounded-3xl shadow-2xl transition-all duration-500 ${
+              mode === 'lovable'
+                ? 'bg-white border-2 border-pink-100'
+                : 'bg-white border-2 border-orange-100'
+            }`}
+          >
             {/* Quote Icon */}
             <Quote className={`w-12 h-12 mb-6 ${
               mode === 'lovable' ? 'text-pink-400' : 'text-orange-400'
@@ -151,14 +162,20 @@ const Testimonials: React.FC = () => {
               {/* Animated Rating */}
               <div className="flex items-center space-x-1 mb-4">
                 {[...Array(5)].map((_, index) => (
-                  <Star
+                  <motion.div
                     key={index}
-                    className={`w-6 h-6 transition-all duration-300 transform ${
-                      index < (animatedRatings[currentTestimonial] || 0)
-                        ? 'text-yellow-400 fill-current scale-110'
-                        : 'text-gray-300'
-                    } ${mode === 'lovable' ? 'hover:animate-bounce' : ''}`}
-                  />
+                    initial={{ scale: 0.8 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Star
+                      className={`w-6 h-6 transition-all duration-300 transform ${
+                        index < (animatedRatings[currentTestimonial] || 0)
+                          ? 'text-yellow-400 fill-current scale-110'
+                          : 'text-gray-300'
+                      } ${mode === 'lovable' ? 'hover:animate-bounce' : ''}`}
+                    />
+                  </motion.div>
                 ))}
                 <span className="ml-2 text-gray-600 font-medium">
                   ({testimonials[currentTestimonial].rating}/5)
@@ -167,13 +184,9 @@ const Testimonials: React.FC = () => {
             </div>
 
             {/* Customer Info */}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center space-x-4">
-                <img
-                  src={testimonials[currentTestimonial].avatar}
-                  alt={testimonials[currentTestimonial].name}
-                  className="w-16 h-16 rounded-full object-cover shadow-lg"
-                />
+                
                 <div>
                   <h4 className="font-semibold text-gray-800 text-lg">
                     {testimonials[currentTestimonial].name}
@@ -181,34 +194,36 @@ const Testimonials: React.FC = () => {
                   <p className="text-gray-600">
                     {testimonials[currentTestimonial].location}
                   </p>
-                  <p className="text-sm text-gray-500">
-                    {testimonials[currentTestimonial].date}
-                  </p>
+                 
                 </div>
               </div>
 
               {/* Navigation Arrows */}
               <div className="flex space-x-2">
-                <button
+                <motion.button
                   onClick={prevTestimonial}
-                  className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className={`p-2 rounded-full transition-all duration-300 ${
                     mode === 'lovable'
                       ? 'bg-pink-100 hover:bg-pink-200 text-pink-600'
                       : 'bg-orange-100 hover:bg-orange-200 text-orange-600'
                   }`}
                 >
                   <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                   onClick={nextTestimonial}
-                  className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className={`p-2 rounded-full transition-all duration-300 ${
                     mode === 'lovable'
                       ? 'bg-pink-100 hover:bg-pink-200 text-pink-600'
                       : 'bg-orange-100 hover:bg-orange-200 text-orange-600'
                   }`}
                 >
                   <ChevronRight className="w-5 h-5" />
-                </button>
+                </motion.button>
               </div>
             </div>
 
@@ -220,57 +235,23 @@ const Testimonials: React.FC = () => {
                 🥞
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Testimonial Indicators */}
           <div className="flex justify-center space-x-2 mt-8">
             {testimonials.map((_, index) => (
-              <button
+              <motion.button
                 key={index}
                 onClick={() => goToTestimonial(index)}
+                whileHover={{ scale: 1.2 }}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === currentTestimonial
                     ? mode === 'lovable'
                       ? 'bg-pink-500 scale-125'
                       : 'bg-orange-500 scale-125'
-                    : 'bg-gray-300 hover:bg-gray-400 hover:scale-110'
+                    : 'bg-gray-300 hover:bg-gray-400'
                 }`}
               />
-            ))}
-          </div>
-
-          {/* Floating Reviews */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-            {testimonials.slice(0, 3).map((testimonial, index) => (
-              <div
-                key={index}
-                className={`p-6 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl ${
-                  index === currentTestimonial
-                    ? mode === 'lovable'
-                      ? 'bg-gradient-to-br from-pink-100 to-purple-100 border-2 border-pink-300'
-                      : 'bg-gradient-to-br from-orange-100 to-red-100 border-2 border-orange-300'
-                    : 'bg-white hover:bg-gray-50'
-                }`}
-              >
-                <div className="flex items-center space-x-3 mb-4">
-                  <img
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div>
-                    <h5 className="font-semibold text-gray-800">{testimonial.name}</h5>
-                    <div className="flex">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <p className="text-gray-600 text-sm line-clamp-3">
-                  "{testimonial.comment}"
-                </p>
-              </div>
             ))}
           </div>
         </div>

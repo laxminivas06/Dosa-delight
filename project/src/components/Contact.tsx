@@ -21,56 +21,56 @@ const Contact: React.FC = () => {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    try {
-      const response = await fetch('https://dosad-backend.onrender.com/api/contacts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  
+  try {
+    const response = await fetch('http://localhost:3001/api/contacts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
 
-      if (!response.ok) throw new Error('Failed to submit');
-      
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', phone: '', message: '' });
-      
-      // Fallback to localStorage if needed
-      const fallbackContacts = JSON.parse(localStorage.getItem('pendingContacts') || '[]');
-      fallbackContacts.push(formData);
-      localStorage.setItem('pendingContacts', JSON.stringify(fallbackContacts));
-      
-    } catch (error) {
-      console.error('Error submitting contact form:', error);
-      // Fallback to localStorage
-      const fallbackContacts = JSON.parse(localStorage.getItem('pendingContacts') || '[]');
-      fallbackContacts.push(formData);
-      localStorage.setItem('pendingContacts', JSON.stringify(fallbackContacts));
-      
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', phone: '', message: '' });
-    }
+    if (!response.ok) throw new Error('Failed to submit');
     
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 3000);
-  };
+    setIsSubmitted(true);
+    setFormData({ name: '', email: '', phone: '', message: '' });
+    
+    // Fallback to localStorage if needed
+    const fallbackContacts = JSON.parse(localStorage.getItem('pendingContacts') || '[]');
+    fallbackContacts.push(formData);
+    localStorage.setItem('pendingContacts', JSON.stringify(fallbackContacts));
+    
+  } catch (error) {
+    console.error('Error submitting contact form:', error);
+    // Fallback to localStorage
+    const fallbackContacts = JSON.parse(localStorage.getItem('pendingContacts') || '[]');
+    fallbackContacts.push(formData);
+    localStorage.setItem('pendingContacts', JSON.stringify(fallbackContacts));
+    
+    setIsSubmitted(true);
+    setFormData({ name: '', email: '', phone: '', message: '' });
+  }
+  
+  setTimeout(() => {
+    setIsSubmitted(false);
+  }, 3000);
+};
 
   const contactInfo = [
     {
       icon: Phone,
       title: 'Call Us',
       details: ['+61 420 774 951'],
-      action: 'tel:+61420774951'
+      action: 'tel:+919876543210'
     },
     {
       icon: Mail,
       title: 'Email Us',
       details: ['dosadelight48@gmail.com'],
-      action: 'mailto:dosadelight48@gmail.com'
+      action: 'mailto:info@dosadelight.com'
     },
     {
       icon: MapPin,
@@ -104,7 +104,7 @@ const Contact: React.FC = () => {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring" as const,
+        type: 'spring' as const,
         stiffness: 100
       }
     }
@@ -128,8 +128,9 @@ const Contact: React.FC = () => {
         ? 'bg-gradient-to-b from-pink-50 to-purple-50'
         : 'bg-gradient-to-b from-gray-50 to-white'
     }`}>
+
       {/* Logo Animation */}
-      <motion.div
+              <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, type: 'spring' }}
@@ -138,7 +139,7 @@ const Contact: React.FC = () => {
         <motion.img
           src="https://i.postimg.cc/W470Rm5s/Dosa.png"
           alt="DosaDelight Logo"
-          className="w-32 h-32 md:w-42 md:h-42"
+          className="w-48 h-48 sm:w-50 sm:h-50 md:w-64 md:h-64 lg:w-150 lg:h-150" // Increased the size
           animate={{
             rotate: [0, 10, -10, 0],
             scale: [1, 1.1, 1]
@@ -376,33 +377,33 @@ const Contact: React.FC = () => {
             ))}
 
             {/* Map - Alternative using your direct link */}
-            <motion.div 
-              initial="hidden"
-              animate="visible"
-              variants={itemVariants}
-              className="rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg"
-            >
-              <a 
-                href="https://maps.app.goo.gl/wjRLMjFajMz7bEr17" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="h-48 sm:h-64 w-full flex items-center justify-center"
-              >
-                <div className={`h-full w-full flex items-center justify-center ${
-                  mode === 'lovable'
-                    ? 'bg-gradient-to-br from-pink-200 to-purple-200'
-                    : 'bg-gradient-to-br from-orange-200 to-red-200'
-                }`}>
-                  <div className="text-center">
-                    <MapPin className={`w-8 sm:w-12 h-8 sm:h-12 mx-auto mb-2 ${
-                      mode === 'lovable' ? 'text-pink-600' : 'text-orange-600'
-                    }`} />
-                    <p className="text-gray-700 font-medium text-sm sm:text-base">View on Google Maps</p>
-                    <p className="text-xs sm:text-sm text-gray-600">Click to open</p>
-                  </div>
-                </div>
-              </a>
-            </motion.div>
+<motion.div 
+  initial="hidden"
+  animate="visible"
+  variants={itemVariants}
+  className="rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg"
+>
+  <a 
+    href="https://maps.app.goo.gl/wjRLMjFajMz7bEr17" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="h-48 sm:h-64 w-full flex items-center justify-center"
+  >
+    <div className={`h-full w-full flex items-center justify-center ${
+      mode === 'lovable'
+        ? 'bg-gradient-to-br from-pink-200 to-purple-200'
+        : 'bg-gradient-to-br from-orange-200 to-red-200'
+    }`}>
+      <div className="text-center">
+        <MapPin className={`w-8 sm:w-12 h-8 sm:h-12 mx-auto mb-2 ${
+          mode === 'lovable' ? 'text-pink-600' : 'text-orange-600'
+        }`} />
+        <p className="text-gray-700 font-medium text-sm sm:text-base">View on Google Maps</p>
+        <p className="text-xs sm:text-sm text-gray-600">Click to open</p>
+      </div>
+    </div>
+  </a>
+</motion.div>
           </div>
         </div>
       </div>

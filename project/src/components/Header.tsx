@@ -17,7 +17,7 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = ['Home', 'About', 'Menu', 'Gallery', 'Contact'];
+  const navItems = ['Home', 'About', 'Menu', 'Gallery', 'Testimonials', 'Contact'];
 
   const navigateToPage = (page: string) => {
     window.location.hash = page.toLowerCase();
@@ -66,29 +66,24 @@ const Header: React.FC = () => {
               transition={{ duration: 0.5 }}
               whileHover={{ scale: 1.05 }}
             >
-              
-                <motion.img
-  src="https://i.postimg.cc/W470Rm5s/Dosa.png"
-  alt="DosaDelight Logo"
-  className="w-16 h-16 md:w-42 md:h-42"
-  animate={{
-    rotate: [0, 10, -10, 0],
-    scale: [1, 1.1, 1]
-  }}
-  transition={{
-    duration: 100000000,
-    repeat: Infinity,
-    repeatType: 'reverse'
-  }}
-/>
-           
+              <motion.img
+                src="https://i.postimg.cc/W470Rm5s/Dosa.png"
+                alt="DosaDelight Logo"
+                className="w-20 h-20 md:w-42 md:h-42"
+                animate={{
+                  rotate: [0, 10, -10, 0],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{
+                  duration: 100000000,
+                  repeat: Infinity,
+                  repeatType: 'reverse'
+                }}
+              />
               <div>
                 <h1 className={`font-bold text-xl text-gray-800 ${mode === 'lovable' ? 'font-playful' : ''}`}>
-                  DosaDelight
+                  Dosa Delight
                 </h1>
-                <p className="text-xs text-gray-600">
-                  Vanakkam! Welcome
-                </p>
               </div>
             </motion.a>
 

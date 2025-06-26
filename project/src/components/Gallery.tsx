@@ -121,36 +121,11 @@ const Gallery: React.FC = () => {
   };
 
   return (
-    
     <section id="gallery" className={`py-20 ${
       mode === 'lovable'
         ? 'bg-gradient-to-b from-pink-50 to-purple-50'
         : 'bg-gradient-to-b from-gray-50 to-white'
     }`}>
-
-     {/* Logo Animation */}
-             <motion.div
-       initial={{ opacity: 0, y: -50 }}
-       animate={{ opacity: 1, y: 0 }}
-       transition={{ duration: 0.8, type: 'spring' }}
-       className="mb-8 flex justify-center"
-     >
-       <motion.img
-         src="https://i.postimg.cc/W470Rm5s/Dosa.png"
-         alt="DosaDelight Logo"
-         className="w-32 h-32 md:w-42 md:h-42" // Increased the size
-         animate={{
-           rotate: [0, 10, -10, 0],
-           scale: [1, 1.1, 1]
-         }}
-         transition={{
-           duration: 10000,
-           repeat: Infinity,
-           repeatType: 'reverse'
-         }}
-       />
-     </motion.div>
-              
       <div className="container mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-16">
@@ -199,11 +174,11 @@ const Gallery: React.FC = () => {
         </div>
 
         {/* Masonry Grid */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+        <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
           {galleryImages.map((image, index) => (
             <motion.div
               key={index}
-              className="break-inside-avoid relative group cursor-pointer"
+              className="break-inside-avoid relative group cursor-pointer mb-4"
               onClick={() => setSelectedImage(index)}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -212,7 +187,7 @@ const Gallery: React.FC = () => {
             >
               {/* Loading Placeholder */}
               {!imageLoaded[index] && (
-                <div className={`w-full h-64 rounded-xl ${
+                <div className={`w-full h-48 sm:h-64 rounded-xl ${
                   mode === 'lovable'
                     ? 'bg-gradient-to-br from-pink-200 to-purple-200'
                     : 'bg-gradient-to-br from-orange-200 to-red-200'
@@ -232,8 +207,8 @@ const Gallery: React.FC = () => {
               {/* Overlay */}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 rounded-xl flex items-end p-4">
                 <div className="text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-                  <h3 className="font-semibold text-lg mb-1">{image.title}</h3>
-                  <p className="text-sm text-gray-200">{image.description}</p>
+                  <h3 className="font-semibold text-sm sm:text-lg mb-1">{image.title}</h3>
+                  <p className="text-xs sm:text-sm text-gray-200">{image.description}</p>
                 </div>
               </div>
 

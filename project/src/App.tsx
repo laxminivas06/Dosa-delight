@@ -10,6 +10,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import AdminLogin from './components/AdminLogin';
 import AdminDashboard from './components/AdminDashboard';
+import Testimonials from './components/Testimonials';
 
 
 
@@ -47,6 +48,7 @@ function App() {
           <>
             <Hero />
             <Gallery />
+            <Testimonials/>
             <Contact />
           </>
         );
@@ -71,6 +73,15 @@ function App() {
             <Contact />
           </>
         );
+
+        case 'testimonials':
+        return (
+          <>
+            <Testimonials />
+            <Contact />
+          </>
+        );
+
       case 'contact':
         return <Contact />;
       default:

@@ -68,7 +68,7 @@ const About: React.FC = () => {
        <motion.img
          src="https://i.postimg.cc/W470Rm5s/Dosa.png"
          alt="DosaDelight Logo"
-         className="w-32 h-32 md:w-42 md:h-42" // Increased the size
+        className="w-48 h-48 sm:w-50 sm:h-50 md:w-64 md:h-64 lg:w-150 lg:h-150" // Increased the size
          animate={{
            rotate: [0, 10, -10, 0],
            scale: [1, 1.1, 1]

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Heart, Phone, Mail, MapPin, Instagram, Lock } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { motion } from 'framer-motion';
 
 const Footer: React.FC = () => {
   const { mode } = useTheme();
@@ -49,77 +50,95 @@ const Footer: React.FC = () => {
         ))}
       </div>
 
+      {/* Developer Credits - Moved to top */}
+      <div className="relative z-10">
+        <div className="flex justify-center pt-8">
+          <div className={`p-4 sm:p-6 rounded-xl mx-4 ${
+            mode === 'lovable'
+              ? 'bg-pink-100/30 border-pink-700 backdrop-blur-sm'
+              : 'bg-orange-100/30 border-orange-700 backdrop-blur-sm'
+          }`}>
+            <p className={`text-sm ${
+              mode === 'lovable' ? 'text-pink-200' : 'text-orange-200'
+            }`}>
+              This Website was Developed by
+            </p>
+            <div className="flex justify-center mt-3">
+              <a 
+                href="https://nivaseditz.netlify.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={`p-3 rounded-lg transition-all duration-300 hover:scale-105 ${
+                  mode === 'lovable'
+                    ? 'bg-pink-50/80 hover:bg-pink-100/80'
+                    : 'bg-orange-50/80 hover:bg-orange-100/80'
+                }`}
+              >
+                <img
+                  src="https://i.postimg.cc/tRDy1sM7/Nivas.png"
+                  className="h-20 w-20 sm:w-50 sm:h-50"
+                  alt="Nivas Editz"
+                />
+              </a>
+            </div>
+            <p className={`text-xs mt-3 ${
+              mode === 'lovable' ? 'text-pink-300' : 'text-orange-300'
+            }`}>
+              Tap on icon to view our Website
+            </p>
+          </div>
+        </div>
+      </div>
 
-{/* Developer Credits */}
-<div className={`text-center mt-8 border-t ${
-  mode === 'lovable' 
-    ? 'border-pink-700' 
-    : 'border-orange-700'
-} pt-6`}>
-  <div className={`p-4 sm:p-6 rounded-xl ${
-    mode === 'lovable'
-      ? 'bg-pink-100/30 backdrop-blur-sm'
-      : 'bg-orange-100/30 backdrop-blur-sm'
-  }`}>
-    <p className={`text-sm ${
-      mode === 'lovable' ? 'text-pink-200' : 'text-orange-200'
-    }`}>
-      This Website was Developed by
-    </p>
-    <div className="flex justify-center mt-3">
-      <a 
-        href="https://nivaseditz.netlify.app/" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className={`p-3 rounded-lg transition-all duration-300 hover:scale-105 ${
-          mode === 'lovable'
-            ? 'bg-pink-50/80 hover:bg-pink-100/80'
-            : 'bg-orange-50/80 hover:bg-orange-100/80'
-        }`}
-      >
-        <img
-          src="https://i.postimg.cc/tRDy1sM7/Nivas.png"
-          className="h-20 sm:h-20"
-          alt="Nivas Editz"
-        />
-      </a>
-    </div>
-    <p className={`text-xs mt-3 ${
-      mode === 'lovable' ? 'text-pink-300' : 'text-orange-300'
-    }`}>
-      Tap on icon to view our Website
-    </p>
-  </div>
-</div>
-
-      <div className="relative z-10 container mx-auto px-4 py-16">
+      <div className="relative z-10 container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand Section */}
           <div className="lg:col-span-2">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                mode === 'lovable'
-                  ? 'bg-gradient-to-br from-pink-400 to-purple-500'
-                  : 'bg-gradient-to-br from-orange-500 to-red-600'
-              } animate-pulse`}>
-                <span className="text-white font-bold text-xl">🥞</span>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white">DosaDelight</h3>
-                <p className="text-gray-300 text-sm">Vanakkam! Welcome</p>
-              </div>
+            <div className="flex flex-col items-center md:items-start md:flex-row md:space-x-3 mb-6">
+              {/* Logo Animation */}
+              <motion.div
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, type: 'spring' }}
+                className="mb-4 md:mb-8 flex flex-col items-center"
+              >
+                {/* Animated circle */}
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                  mode === 'lovable'
+                    ? 'bg-gradient-to-br from-pink-400 to-purple-500'
+                    : 'bg-gradient-to-br from-orange-500 to-red-600'
+                } animate-pulse mb-4`}></div>
+                
+                <motion.img
+                  src="https://i.postimg.cc/W470Rm5s/Dosa.png"
+                  alt="DosaDelight Logo"
+                  className="w-48 h-48 sm:w-50 sm:h-50 md:w-64 md:h-64 lg:w-150 lg:h-150"
+                  animate={{
+                    rotate: [0, 10, -10, 0],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{
+                    duration: 10000,
+                    repeat: Infinity,
+                    repeatType: 'reverse'
+                  }}
+                />
+                
+                {/* Title */}
+                <h3 className="text-2xl font-bold text-white mt-4 md:mt-0 md:ml-4">DosaDelight</h3>
+              </motion.div>
             </div>
-            <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+            
+            <p className="text-gray-300 text-base md:text-lg mb-6 leading-relaxed">
               Dosa Delight celebrates the rich flavors of South India with a strong foundation in Telugu culinary traditions. Known for our authentic Andhra-style dosas and bold chutneys, we blend time-honored recipes with a modern touch. Our ingredients are thoughtfully sourced—fiery Guntur chillies, fragrant curry leaves, and stone-ground idli rava—while our batters are fermented in traditional clay pots for unmatched flavor. From the tangy Gongura Dosa to the buttery Benne Dosa, every dish reflects the soulful diversity of southern cuisine, offering a warm, home-style experience in every bite.
             </p>
-            <div className="flex items-center space-x-2 text-gray-300">
+            
+            <div className="flex justify-center md:justify-start items-center space-x-2 text-gray-300">
               <span>Made with</span>
               <Heart className="w-4 h-4 text-red-400 animate-pulse" />
               <span>in India</span>
             </div>
           </div>
-
-
 
           {/* Quick Links */}
           <div>
@@ -161,37 +180,39 @@ const Footer: React.FC = () => {
               </div>
             </div>
 
-            <a
-              href="#admin"
-              className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
-                mode === 'lovable'
-                  ? 'bg-pink-800 hover:bg-pink-700 text-pink-300'
-                  : 'bg-orange-800 hover:bg-orange-700 text-orange-300'
-              }`}
-              title="Admin Login"
-              aria-label="Admin Login"
-            >
-              <Lock className="w-5 h-5" />
-            </a>
+            <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-4 sm:space-y-0">
+              <a
+                href="#admin"
+                className={`p-2 rounded-full transition-all duration-300 hover:scale-110 w-fit ${
+                  mode === 'lovable'
+                    ? 'bg-pink-800 hover:bg-pink-700 text-pink-300'
+                    : 'bg-orange-800 hover:bg-orange-700 text-orange-300'
+                }`}
+                title="Admin Login"
+                aria-label="Admin Login"
+              >
+                <Lock className="w-5 h-5" />
+              </a>
 
-            {/* Social Links */}
-            <div className="mt-6">
-              <h5 className="text-white font-medium mb-3">Follow Us</h5>
-              <div className="flex space-x-3">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
-                      mode === 'lovable'
-                        ? 'bg-pink-800 hover:bg-pink-700 text-pink-300'
-                        : 'bg-orange-800 hover:bg-orange-700 text-orange-300'
-                    }`}
-                    aria-label={social.label}
-                  >
-                    <social.icon className="w-5 h-5" />
-                  </a>
-                ))}
+              {/* Social Links */}
+              <div>
+                <h5 className="text-white font-medium mb-3">Follow Us</h5>
+                <div className="flex space-x-3">
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
+                        mode === 'lovable'
+                          ? 'bg-pink-800 hover:bg-pink-700 text-pink-300'
+                          : 'bg-orange-800 hover:bg-orange-700 text-orange-300'
+                      }`}
+                      aria-label={social.label}
+                    >
+                      <social.icon className="w-5 h-5" />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -202,10 +223,10 @@ const Footer: React.FC = () => {
           mode === 'lovable' ? 'border-pink-800' : 'border-orange-800'
         } pt-8`}>
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-white text-sm mb-4 md:mb-0">
+            <p className="text-white text-sm mb-4 md:mb-0 text-center md:text-left">
               © {currentYear} DosaDelight. All rights reserved. Crafted with passion for authentic flavors.
             </p>
-            <div className="flex space-x-6 text-sm">
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
               <a href="#" className="text-white hover:text-white transition-colors">
                 Privacy Policy
               </a>
@@ -217,8 +238,6 @@ const Footer: React.FC = () => {
               </a>
             </div>
           </div>
-
-         
         </div>
       </div>
     </footer>
