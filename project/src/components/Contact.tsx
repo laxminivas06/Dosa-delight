@@ -21,15 +21,24 @@ const Contact: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-    setFormData({ name: '', email: '', phone: '', message: '' });
-    
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 3000);
-  };
+  // In your Contact component
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+  
+  const form = e.currentTarget as HTMLFormElement;
+  const formData = new FormData(form);
+  
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(formData as any).toString(),
+  })
+    .then(() => {
+      setIsSubmitted(true);
+      setFormData({ name: '', email: '', phone: '', message: '' });
+    })
+    .catch(error => console.error('Error:', error));
+};
 
   const contactInfo = [
     {

@@ -2,12 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon"  href="https://i.postimg.cc/W470Rm5s/Dosa.png" />
+    <link rel="icon" href="https://i.postimg.cc/W470Rm5s/Dosa.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dosa Delight </title>
+    <title>Dosa Delight</title>
   </head>
   <body>
     <div id="root"></div>
+    
+    <!-- Hidden Netlify Form for Detection -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <textarea name="message"></textarea>
+      <input type="hidden" name="form-name" value="contact" />
+    </form>
+    
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
