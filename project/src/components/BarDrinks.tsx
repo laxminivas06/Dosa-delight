@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Wine, Coffee, Sparkles, Clock, Star, Plus, Flame, Leaf, X } from 'lucide-react';
+import { Wine, Sparkles, Clock, Star, Plus, Flame, Leaf, X } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
-import { useCart } from '../contexts/CartContext';
 import { motion } from 'framer-motion';
 interface DrinkItem {
   name: string;
@@ -22,7 +21,7 @@ interface DrinkCategory {
 
 const BarDrinks: React.FC = () => {
   const { mode } = useTheme();
-  const { addToCart } = useCart();
+  
   const [selectedCategory, setSelectedCategory] = useState<DrinkCategory | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
@@ -125,18 +124,7 @@ const BarDrinks: React.FC = () => {
     document.body.style.overflow = 'unset';
   };
 
-  const handleAddToCart = (item: DrinkItem, category: DrinkCategory) => {
-    const cartItem = {
-      id: `${category.name}-${item.name}`,
-      name: item.name,
-      price: item.price,
-      description: item.description,
-      category: category.name,
-      isAlcoholic: item.isAlcoholic,
-      isSignature: item.isSignature
-    };
-    addToCart(cartItem);
-  };
+ 
 
   const getRandomImages = (count: number) => {
     const shuffled = [...decorativeImages].sort(() => 0.5 - Math.random());
