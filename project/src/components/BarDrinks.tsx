@@ -475,6 +475,7 @@ const BarDrinks: React.FC = () => {
   </p>
 </div>
 
+
 {/* Features */}
 <div className="flex flex-nowrap md:flex-row justify-between gap-4 sm:gap-6 md:gap-8 mb-16 px-4 md:px-0">  {/* Increased base gap to gap-4 */}
   {[

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Mail, Calendar, GlassWater, Utensils } from 'lucide-react';
+import { ArrowRight, Mail, Calendar, GlassWater, Utensils, Phone } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
@@ -15,8 +15,7 @@ const Hero: React.FC = () => {
         "https://img.onmanorama.com/content/dam/mm/en/food/features/images/2024/6/3/indian-tiffin.jpg?w=1120&h=583",
          "https://media.istockphoto.com/id/1396604313/photo/roasted-whole-chicken-legs-with-condiment-directly-above-photo.jpg?s=612x612&w=0&k=20&c=JDs72E-fX5SdcBQREta58T82W8zO_rFiKC7d1WwEEUE=",
           "https://media.istockphoto.com/id/1334115358/photo/cabbage-manchurian.jpg?s=612x612&w=0&k=20&c=lZvW1lWr03mQszDbx4v59IAnxWacQ_Ti275hjj18hcE=",
-          
-            "https://media.istockphoto.com/id/471614507/photo/indian-chicken-curry.jpg?s=612x612&w=0&k=20&c=uT5QbV1SD6Hux043sAhsm5IyVxAGzNt47r6nL1YyIQc=",
+          "https://media.istockphoto.com/id/471614507/photo/indian-chicken-curry.jpg?s=612x612&w=0&k=20&c=uT5QbV1SD6Hux043sAhsm5IyVxAGzNt47r6nL1YyIQc=",
              "https://images.pexels.com/photos/340996/pexels-photo-340996.jpeg?cs=srgb&dl=pexels-isabella-mendes-107313-340996.jpg&fm=jpg",
               "https://images.pexels.com/photos/8887011/pexels-photo-8887011.jpeg"
                
@@ -84,6 +83,14 @@ const Hero: React.FC = () => {
   const navigateToBanquet = () => window.location.hash = 'banquet';
   const navigateToBar = () => window.location.hash = 'bar';
   const navigateToRestaurant = () => window.location.hash = 'menu';
+  
+  // WhatsApp contact function
+  const contactViaWhatsApp = () => {
+    const phoneNumber = '+61406969996';
+    const message = 'Hello DosaDelight, I would like to inquire about...';
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -239,40 +246,41 @@ const Hero: React.FC = () => {
           </div>
 
           {/* Delivery Partners Section */}
-<motion.div 
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ delay: 0.3 }}
-  className={`mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg backdrop-blur-sm mx-auto w-fit ${
-    mode === 'lovable' ? 'bg-white/40' : 'bg-white/40'
-  }`}
->
-  <h3 className={`text-center text-xs sm:text-sm font-bold mb-2 ${
-    mode === 'lovable' 
-      ? 'text-purple-600' 
-      : 'text-orange-600'
-  }`}>
-    Delivery Partners:
-  </h3>
-  <div className="flex justify-center items-center gap-3 sm:gap-5">
-    {deliveryPartners.map((partner, index) => (
-      <motion.div
-        key={index}
-        whileHover={{ scale: 1.05 }}
-       className="w-14 h-14 sm:w-24 sm:h-24 md:w-34 md:h-34 lg:w-50 lg:h-50"
-      >
-        <img 
-          src={partner.logo} 
-          alt={partner.name} 
-          className="h-full w-full object-contain"
-          loading="lazy"
-        />
-      </motion.div>
-    ))}
-  </div>
-</motion.div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className={`mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg backdrop-blur-sm mx-auto w-fit ${
+              mode === 'lovable' ? 'bg-white/40' : 'bg-white/40'
+            }`}
+          >
+            <h3 className={`text-center text-xs sm:text-sm font-bold mb-2 ${
+              mode === 'lovable' 
+                ? 'text-purple-600' 
+                : 'text-orange-600'
+            }`}>
+              Delivery Partners:
+            </h3>
+            <div className="flex justify-center items-center gap-3 sm:gap-5">
+              {deliveryPartners.map((partner, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.05 }}
+                 className="w-14 h-14 sm:w-24 sm:h-24 md:w-34 md:h-34 lg:w-50 lg:h-50"
+                >
+                  <img 
+                    src={partner.logo} 
+                    alt={partner.name} 
+                    className="h-full w-full object-contain"
+                    loading="lazy"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center mb-4 sm:mb-6">
             <motion.button
               onClick={navigateToMenu}
               whileHover={{ scale: 1.05 }}
@@ -304,9 +312,86 @@ const Hero: React.FC = () => {
                 <Mail className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </motion.button>
+            
+            <motion.button
+              onClick={contactViaWhatsApp}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`group px-4 py-2 sm:px-6 sm:py-2 rounded-full font-medium transition-all duration-300 ${
+                mode === 'lovable'
+                  ? 'bg-green-500 text-white hover:bg-green-600'
+                  : 'bg-green-500 text-white hover:bg-green-600'
+              } shadow-md hover:shadow-lg text-xs sm:text-sm`}
+            >
+              <span className="flex items-center justify-center space-x-1 sm:space-x-2">
+                <span>WhatsApp</span>
+                <Phone className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </motion.button>
           </div>
+
+          {/* Marquee Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className={`overflow-hidden w-full rounded-lg ${
+              mode === 'lovable' 
+                ? 'bg-purple-100/80 text-purple-800' 
+                : 'bg-orange-100/80 text-orange-800'
+            }`}
+          >
+            <div className="marquee py-2 sm:py-3">
+              <div className="marquee-content whitespace-nowrap">
+                <span className="mx-4 sm:mx-8 inline-flex items-center">
+                  <span className="hidden sm:inline">48 station street, Harris park, NSW 2150</span>
+                  <span className="sm:hidden">Sydney, Australia</span>
+                </span>
+                <span className="mx-4 sm:mx-8 inline-flex items-center">
+                  <span className="hidden sm:inline">Open 11AM - 11PM</span>
+                  <span className="sm:hidden">11AM-11PM</span>
+                </span>
+                <span className="mx-4 sm:mx-8 inline-flex items-center">
+                  <span className="hidden sm:inline"> Call us +61 406 969 996</span>
+                  <span className="sm:hidden">Call</span>
+                </span>
+                <span className="mx-4 sm:mx-8 inline-flex items-center">
+                  <span className="hidden sm:inline">48 station street, Harris park, NSW 2150</span>
+                  <span className="sm:hidden">Sydney, Australia</span>
+                </span>
+                <span className="mx-4 sm:mx-8 inline-flex items-center">
+                  <span className="hidden sm:inline">Open 11AM - 11PM</span>
+                  <span className="sm:hidden">11AM-11PM</span>
+                </span>
+                <span className="mx-4 sm:mx-8 inline-flex items-center">
+                  <span className="hidden sm:inline">61 406 969 996</span>
+                  <span className="sm:hidden">Call</span>
+                </span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
+
+      {/* Marquee Animation CSS */}
+      <style>{`
+        .marquee {
+          overflow: hidden;
+          position: relative;
+        }
+        .marquee-content {
+          display: inline-block;
+          animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
     </section>
   );
 };

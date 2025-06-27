@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle,MessageCircle } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
@@ -39,13 +39,18 @@ const handleSubmit = (e: React.FormEvent) => {
     })
     .catch(error => console.error('Error:', error));
 };
-
-  const contactInfo = [
+const contactInfo = [
     {
       icon: Phone,
       title: 'Call Us',
       details: ['+61 406 969 996'],
       action: 'tel:+61406969996'
+    },
+    {
+      icon: MessageCircle, // WhatsApp icon (you might need to import this from lucide-react)
+      title: 'WhatsApp Us',
+      details: ['+61 406 969 996'],
+      action: 'https://wa.me/61406969996?text=Hello%20DosaDelight,%20I%20would%20like%20to%20inquire%20about...'
     },
     {
       icon: Mail,
@@ -65,7 +70,8 @@ const handleSubmit = (e: React.FormEvent) => {
       details: ['Mon - Sun: 11:00 AM - 11:00 PM'],
       action: null
     }
-  ];
+];
+ 
 
   // Animation variants (same as before)
   const containerVariants = {

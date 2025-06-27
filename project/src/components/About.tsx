@@ -50,10 +50,10 @@ const About: React.FC = () => {
   ];
 
   const signatureSpices = [
-    "Andhra Guntur Chilli",
-    "Telangana Dum ki Masala",
-    "Delhi Street Chaat Spice",
-    "Tamil Nadu Tiffin Spice Mix",
+    "Indian Red Chilli",
+    "Dum ki Masala",
+    "Indian Street Chaat Spice",
+    "Multi Tiffin Spice Mix",
   ];
 
   return (
@@ -182,16 +182,27 @@ const About: React.FC = () => {
             <div className={`text-lg leading-relaxed mb-8 ${
               mode === 'lovable' ? 'text-gray-600' : 'text-gray-700'
             }`}>
-              <p className="mb-4">
-               DosaDelight is a celebration of South Indian culinary heritage, with a heart rooted in Telugu traditions. What began as a modest venture has grown into a beloved destination for authentic Andhra-style dosas and regional specialties that blend age-old recipes with contemporary flair.
+             
+  <p className="mb-4 text-sm md:text-base">
+    DosaDelight is a celebration of Indian culinary heritage, with a heart rooted in Indian traditions. What began as a modest venture has grown into a beloved destination for authentic Indian cuisine - from crispy dosas to rich curries and tandoori specialties - that blend age-old recipes with contemporary flair.
+  </p>
+  
+  <p className="mb-4 text-sm md:text-base">
+    Every dish we serve tells a story — our dosas crafted with batters fermented in traditional clay pots for unmatched depth of flavor, our biryanis layered with aromatic spices, and our curries simmered to perfection. We take pride in sourcing our ingredients with care: fiery Guntur chillies, fragrant curry leaves, stone-ground idli rava, and premium basmati rice come straight from trusted regional producers across India.
+  </p>
 
-              </p>
-              <p className="mb-4">
-                Every dosa we serve tells a story — crafted with batters fermented in traditional clay pots for an unmatched depth of flavor, and paired with house-made chutneys that pack a punch. We take pride in sourcing our ingredients with care: fiery Guntur chillies, fragrant curry leaves, and stone-ground idli rava come straight from trusted regional producers across South India.
-              </p>
-              <p>
-                Our menu reflects the rich diversity of southern cuisine — from the tangy Gongura Dosa inspired by classic Andhra pickles to the melt-in-your-mouth Benne Dosa, a buttery nod to Karnataka. At DosaDelight, we bring the warmth of home-style cooking to every plate, offering a soulful experience that’s both nostalgic and refreshingly new.
-              </p>
+  <p className="mb-4 text-sm md:text-base">
+    Beyond our famous dosas, our menu reflects the rich diversity of Indian cuisine — from the tangy Gongura Dosa inspired by classic Andhra pickles to the melt-in-your-mouth Benne Dosa, from rich Mughlai curries to spicy Chettinad specialties. At DosaDelight, we bring the warmth of home-style cooking to every plate, offering a soulful experience that's both nostalgic and refreshingly new.
+  </p>
+
+  <p className="mb-4 text-sm md:text-base bg-amber-50 p-4 rounded-lg border-l-4 border-amber-200">
+    Our elegant banquet halls provide the perfect setting for your special occasions. Whether it's weddings, corporate events, or family celebrations, we offer customizable spaces with authentic Indian decor, state-of-the-art facilities, and of course, our signature culinary excellence to make your event truly memorable.
+  </p>
+
+  <p className="text-sm md:text-base bg-blue-50 p-4 rounded-lg border-l-4 border-blue-200">
+    Complete your experience at our premium bar, where we serve auspicious drinks and creative cocktails inspired by Indian traditions. Enjoy our signature masala-infused spirits, refreshing lassis with a modern twist, or choose from our selection of fine wines and beers that perfectly complement Indian flavors.
+  </p>
+
             </div>
 
             {/* Signature Spices */}
