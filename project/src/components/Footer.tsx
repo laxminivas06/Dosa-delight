@@ -131,9 +131,9 @@ const navigateTo = (page: string) => {
               </motion.div>
             </div>
             
-            <p className="text-gray-300 text-base md:text-lg mb-6 leading-relaxed">
-              Dosa Delight celebrates the rich flavors of South India with a strong foundation in Telugu culinary traditions. Known for our authentic Andhra-style dosas and bold chutneys, we blend time-honored recipes with a modern touch.
-            </p>
+           <p className="text-gray-300 text-base md:text-lg mb-6 leading-relaxed">
+  Dosa Delight is more than just a taste of South India — it’s a celebration of India’s diverse culinary heritage. From soulful spiritual offerings to traditional delicacies across regions, we honor the essence of Indian cuisine in every dish, bringing the full spectrum of flavors from all corners of the country.
+</p>
             
             <div className="flex justify-center md:justify-start items-center space-x-2 text-gray-300">
               <span>Made with</span>
