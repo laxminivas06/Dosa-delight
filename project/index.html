@@ -9,13 +9,32 @@
   <body>
     <div id="root"></div>
     
-    <!-- Hidden Netlify Form for Detection -->
+    <!-- Hidden Netlify Forms for Detection -->
+    <!-- Contact Form -->
     <form name="contact" netlify netlify-honeypot="bot-field" hidden>
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="tel" name="phone" />
       <textarea name="message"></textarea>
       <input type="hidden" name="form-name" value="contact" />
+    </form>
+    
+    <!-- Banquet Booking Form -->
+    <form name="banquet-booking" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <select name="eventType">
+        <option value="Corporate Events">Corporate Events</option>
+        <option value="Birthday Parties">Birthday Parties</option>
+        <option value="Anniversaries">Anniversaries</option>
+        <option value="Receptions">Receptions</option>
+        <option value="Cultural Events">Cultural Events</option>
+      </select>
+      <input type="date" name="eventDate" />
+      <input type="number" name="guestCount" />
+      <textarea name="message"></textarea>
+      <input type="hidden" name="form-name" value="banquet-booking" />
     </form>
     
     <script type="module" src="/src/main.tsx"></script>

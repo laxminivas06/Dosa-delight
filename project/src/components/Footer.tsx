@@ -7,15 +7,22 @@ const Footer: React.FC = () => {
   const { mode } = useTheme();
   const currentYear = new Date().getFullYear();
 
+  // Get current page from URL hash (e.g., #menu)
+  const currentPage = window.location.hash.replace(/^#/, '') || 'home';
+
   const quickLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Menu', href: '#menu' },
-    { name: 'Gallery', href: '#gallery' },
-   
-    { name: 'Contact', href: '#contact' }
+    { name: 'Home', page: 'home' },
+    { name: 'Menu', page: 'menu' },
+    { name: 'Bar', page: 'bar' },
+    { name: 'Banquet', page: 'banquet' },
+    { name: 'Gallery', page: 'gallery' },
+    { name: 'Contact', page: 'contact' }
   ];
 
+const navigateTo = (page: string) => {
+  window.location.hash = page;
+  window.scrollTo(0, 0);
+};
   const socialLinks = [
     { icon: Instagram, href: '#', label: 'Instagram' }
   ];
@@ -138,24 +145,30 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Quick Links with Testimonials */}
-          <div>
-            <h4 className="text-white font-semibold text-lg mb-6">Quick Links</h4>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <button
-                    onClick={() => scrollToSection(link.href)}
-                    className={`text-gray-300 hover:text-white transition-colors duration-300 hover:scale-105 transform ${
-                      mode === 'lovable' ? 'hover:text-pink-300' : 'hover:text-orange-300'
-                    }`}
-                  >
-                    {link.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+        
+<div className="mt-8 md:mt-0">
+  <h4 className="text-white font-semibold text-lg mb-4 md:mb-6">Quick Links</h4>
+  <ul className="grid grid-cols-2 gap-3 sm:flex sm:flex-col sm:gap-2">
+    {quickLinks.map((link) => (
+      <li key={link.name}>
+        <button
+          onClick={() => navigateTo(link.page)}
+          className={`w-full text-left py-2 px-3 rounded-lg transition-all ${
+            mode === 'lovable'
+              ? 'hover:bg-pink-800/50'
+              : 'hover:bg-orange-800/50'
+          } ${
+            currentPage === link.page 
+              ? 'bg-white/10 font-bold' 
+              : 'text-gray-300'
+          }`}
+        >
+          {link.name}
+        </button>
+      </li>
+    ))}
+  </ul>
+</div>
 
           {/* Contact Info */}
           <div>

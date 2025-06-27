@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Award, Users, Clock, Heart, ChevronRight } from 'lucide-react';
+import { Flame, Users, Clock, Heart, ChevronRight } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
@@ -10,9 +10,9 @@ const About: React.FC = () => {
   
   const images = [
     'https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/2788792/pexels-photo-2788792.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&w=800'
+    'https://harispeax.wordpress.com/wp-content/uploads/2021/08/thali.png',
+    'https://images.pexels.com/photos/8887011/pexels-photo-8887011.jpeg',
+    'https://media.istockphoto.com/id/1333127675/photo/chicken-biryani-spicy-indian-malabar-biryani-hyderabadi-biryani-dum-biriyani-pulao-golden.jpg?s=612x612&w=0&k=20&c=cuof8o-8VkdKw2EuDV6XTOFjqQBobiff5ugsBwD4Erg='
   ];
 
   const fullText = "Crafting delight in every bite since Day One";
@@ -38,7 +38,12 @@ const About: React.FC = () => {
   }, []);
 
   const features = [
-    { icon: Award, title: 'Award Winning', desc: 'Recognized for authentic Telugu flavors' },
+     { 
+      icon: Flame,  
+      title: 'Live Tandoor Station', 
+      desc: 'Watch chefs bake fluffy naan & kebabs in our clay oven',
+      emoji: '🔥' 
+    },
     { icon: Users, title: 'Family Recipes', desc: 'Grandmothers secret Andhra spices' },
     { icon: Clock, title: 'Fresh Daily', desc: 'Stone-ground batter every morning' },
     { icon: Heart, title: 'Made with Love', desc: 'Every dish tells a South Indian story' }
@@ -46,9 +51,9 @@ const About: React.FC = () => {
 
   const signatureSpices = [
     "Andhra Guntur Chilli",
-    "Telangana Jeera",
-    "Karnataka Mustard Seeds",
-    "Tamil Nadu Curry Leaves"
+    "Telangana Dum ki Masala",
+    "Delhi Street Chaat Spice",
+    "Tamil Nadu Tiffin Spice Mix",
   ];
 
   return (

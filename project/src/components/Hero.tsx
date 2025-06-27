@@ -1,54 +1,89 @@
 import React, { useEffect, useState } from 'react';
-import { ChefHat, Clock, Star, ArrowRight, Mail } from 'lucide-react';
+import { ArrowRight, Mail, Calendar, GlassWater, Utensils } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
   const { mode } = useTheme();
-  const [currentText, setCurrentText] = useState(0);
   const [currentBgIndex, setCurrentBgIndex] = useState(0);
   
-  const heroTexts = [
-    "Authentic South Indian Flavors",
-    "Crispy Dosas Made Fresh",
-    "Spices That Tell Stories"
-  ];
-
-  // Background images for each mode
   const lovableBgImages = [
-    "https://t3.ftcdn.net/jpg/01/54/14/86/360_F_154148685_yvijeC6L2SFpvqFJ5H1lunPg40FzCAf1.jpg",
-    "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?cs=srgb&dl=pexels-chanwalrus-958545.jpg&fm=jpg",
-    "https://c4.wallpaperflare.com/wallpaper/869/719/717/cuisine-food-india-indian-wallpaper-preview.jpg"
+    "https://w0.peakpx.com/wallpaper/275/419/HD-wallpaper-indian-food-indian-food-stock-8k-food.jpg",
+     "https://img.freepik.com/free-photo/delicious-food-table_23-2150857814.jpg?semt=ais_hybrid&w=740",
+      "https://media.istockphoto.com/id/1280158821/photo/diverse-keto-dishes.jpg?s=612x612&w=0&k=20&c=V0YSYORJ5rwklY3adnK5K6XU3nhup1NIT_wq8BizJx8=",
+       "https://i.ytimg.com/vi/ou4zok6jkIw/maxresdefault.jpg",
+        "https://img.onmanorama.com/content/dam/mm/en/food/features/images/2024/6/3/indian-tiffin.jpg?w=1120&h=583",
+         "https://media.istockphoto.com/id/1396604313/photo/roasted-whole-chicken-legs-with-condiment-directly-above-photo.jpg?s=612x612&w=0&k=20&c=JDs72E-fX5SdcBQREta58T82W8zO_rFiKC7d1WwEEUE=",
+          "https://media.istockphoto.com/id/1334115358/photo/cabbage-manchurian.jpg?s=612x612&w=0&k=20&c=lZvW1lWr03mQszDbx4v59IAnxWacQ_Ti275hjj18hcE=",
+          
+            "https://media.istockphoto.com/id/471614507/photo/indian-chicken-curry.jpg?s=612x612&w=0&k=20&c=uT5QbV1SD6Hux043sAhsm5IyVxAGzNt47r6nL1YyIQc=",
+             "https://images.pexels.com/photos/340996/pexels-photo-340996.jpeg?cs=srgb&dl=pexels-isabella-mendes-107313-340996.jpg&fm=jpg",
+              "https://images.pexels.com/photos/8887011/pexels-photo-8887011.jpeg"
+               
+
   ];
 
   const defaultBgImages = [
     "https://images.alphacoders.com/862/862639.jpg",
-    "https://img.freepik.com/premium-photo/traditional-indian-dish-chicken-tikka-masala-with-spicy-curry-meat-bowl-basmati-rice-bread-naan-yoghurt-raita-sauce-rustic-dark-background-top-view-close-up-indian-style-dinner-from_92134-969.jpg?semt=ais_hybrid&w=740",
-    "https://images.all-free-download.com/images/graphiclarge/food_picture_01_hd_pictures_167558.jpg"
+     "https://harispeax.wordpress.com/wp-content/uploads/2021/08/thali.png",
+      "https://media.istockphoto.com/id/1255577137/photo/traditional-indian-dishes-paes-and-misti-doi-blurred-rice-and-non-veg-bengali-meal-special.jpg?s=612x612&w=0&k=20&c=LBXP36DmRTtrnhERDj_CrfFDPOzmMuAbm-Sv89l8hAU=",
+       "https://images.jdmagicbox.com/quickquotes/listicle/listicle_1689934306499_msj3n_3200x2134.jpg",
+        "https://www.lekhafoods.com/media/89221/hyderabad-non-veg-biryani-recipes.jpg",
+         "https://media.istockphoto.com/id/1333127675/photo/chicken-biryani-spicy-indian-malabar-biryani-hyderabadi-biryani-dum-biriyani-pulao-golden.jpg?s=612x612&w=0&k=20&c=cuof8o-8VkdKw2EuDV6XTOFjqQBobiff5ugsBwD4Erg=",
+          "https://thumbs.dreamstime.com/b/south-indian-food-idli-medu-vada-dosa-sambar-coconut-chatney-tomato-chatney-south-indian-cuisine-features-idli-sambar-spicy-314167996.jpg",
+           "https://t4.ftcdn.net/jpg/01/58/36/13/360_F_158361356_PsgqLvsirkpM5n9hqCn48rexuB2UWsul.jpg",
+            "https://media.istockphoto.com/id/1443993866/photo/french-fries-with-ketchup-and-cocktail-sauce.jpg?s=612x612&w=0&k=20&c=URpOsc5tds8tOfxK4ZO3Tkx6mwLho7fL_pTBSNdziBU=",
+             "https://t3.ftcdn.net/jpg/08/76/53/94/360_F_876539462_7OSVGDZ2DebHaFztAGcBTEXgOKykjoeH.jpg",
+              "https://sc0.blr1.cdn.digitaloceanspaces.com/article/102898-sndhrcwqoh-1539346639.jpg",
+               "https://eastindianrecipes.net/wp-content/uploads/2023/05/Mixed-Vegetable-Curry-Indian2-1.jpg",
+                "https://media.istockphoto.com/id/579767430/photo/chicken-tikka-masala.jpg?s=612x612&w=0&k=20&c=EjeRH4r3w9qQ2WELp5qkqkUh1HbJJwRcFNNv1suOtvM=",
+                 "https://i.pinimg.com/736x/ce/55/ca/ce55ca12802685c5938be7e5a8a4323b.jpg",
+                  "https://media.istockphoto.com/id/1441840881/photo/appetizing-traditional-ras-malai-indian-sweet-dish-soft-paneer-balls-immersed-in-creamy-milk.jpg?s=612x612&w=0&k=20&c=9Z7seuhg0eEjvUq8ykjIftkfydKsNLsLq-smHBvZwMg="
+                   
+    
   ];
 
-  useEffect(() => {
-    const textInterval = setInterval(() => {
-      setCurrentText((prev) => (prev + 1) % heroTexts.length);
-    }, 3000);
+  const deliveryPartners = [
+    {
+      name: "Uber Eats",
+      logo: "https://wishu.io/wp-content/uploads/2021/09/Uber-Eats-logo-1024x492-1.jpeg",
+      width: 100
+    },
+    {
+      name: "Door Dash",
+      logo: "https://www.pngall.com/wp-content/uploads/15/Door-Dash-Logo-PNG-Images.png",
+      width: 80
+    },
+    {
+      name: "Menu Log",
+      logo: "https://logowik.com/content/uploads/images/menulog7877.jpg",
+      width: 80
+    }
+  ];
 
+  // Facility images for Banquet, Bar, and Restaurant
+  const facilityImages = {
+    banquet: "https://www.shutterstock.com/shutterstock/videos/1107828539/thumb/5.jpg?ip=x480",
+    bar: "https://images.pexels.com/photos/340996/pexels-photo-340996.jpeg?cs=srgb&dl=pexels-isabella-mendes-107313-340996.jpg&fm=jpg",
+    restaurant: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudCUyMGZvb2R8ZW58MHx8MHx8fDA%3D"
+  };
+
+  useEffect(() => {
     const bgInterval = setInterval(() => {
       setCurrentBgIndex((prev) => (prev + 1) % (mode === 'lovable' ? lovableBgImages.length : defaultBgImages.length));
     }, 5000);
 
     return () => {
-      clearInterval(textInterval);
       clearInterval(bgInterval);
     };
   }, [mode]);
 
-  const navigateToMenu = () => {
-    window.location.hash = 'menu';
-  };
-
-  const navigateToContact = () => {
-    window.location.hash = 'contact';
-  };
+  // Navigation functions
+  const navigateToMenu = () => window.location.hash = 'menu';
+  const navigateToContact = () => window.location.hash = 'contact';
+  const navigateToBanquet = () => window.location.hash = 'banquet';
+  const navigateToBar = () => window.location.hash = 'bar';
+  const navigateToRestaurant = () => window.location.hash = 'menu';
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -79,126 +114,177 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="relative z-10 w-full px-4 sm:px-6 py-12 flex flex-col items-center justify-center">
-        {/* Logo Animation - Updated with larger sizes */}
+        {/* Logo */}
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, type: 'spring' }}
-          className="mb-4 sm:mb-6 md:mb-8 flex justify-center"
+          className="mb-4 sm:mb-6 flex justify-center"
         >
           <motion.img
             src="https://i.postimg.cc/VvgSZGPp/dd.png"
             alt="DosaDelight Logo"
             className="w-48 h-48 sm:w-50 sm:h-50 md:w-64 md:h-64 lg:w-150 lg:h-150"
-            animate={{
-              rotate: [0, 10, -10, 0],
-              scale: [1, 1.1, 1]
-            }}
-            transition={{
-              duration: 10000,
-              repeat: Infinity,
-              repeatType: 'reverse'
-            }}
           />
         </motion.div>
 
-        {/* Main Content - Narrower Container */}
-        <div className="w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto">
-          {/* Animated Title with White Background Container */}
-          <motion.div 
-            className={`px-4 py-3 sm:px-6 sm:py-4 rounded-2xl mb-4 sm:mb-6 backdrop-blur-sm ${
-              mode === 'lovable' 
-                ? 'bg-white/90' 
-                : 'bg-white/90'
-            }`}
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-center ${
-              mode === 'lovable' 
-                ? 'text-gray-800' 
-                : 'text-gray-800'
-            }`}>
-              <span className="inline-block animate-pulse">Dosa</span>
-              <span className={`inline-block ml-2 sm:ml-3 ${
+        {/* Main Content */}
+        <div className="w-full max-w-3xl mx-auto">
+          {/* Facilities Section */}
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-6">
+            {/* Banquet Hall */}
+            <motion.div 
+              onClick={navigateToBanquet}
+              whileHover={{ y: -3 }}
+              className={`relative overflow-hidden p-0 rounded-lg backdrop-blur-sm flex flex-col items-center text-center cursor-pointer ${
                 mode === 'lovable' 
-                  ? 'text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600' 
-                  : 'text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500'
-              }`}>
-                Delight
-              </span>
-            </h1>
-          </motion.div>
-
-          {/* Rotating Text with White Background Container - Different Font */}
-          <motion.div 
-            className={`px-4 py-3 sm:px-6 sm:py-4 rounded-2xl mb-6 sm:mb-8 backdrop-blur-sm ${
-              mode === 'lovable' 
-                ? 'bg-white/90' 
-                : 'bg-white/90'
-            }`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-          >
-            <div className="h-10 sm:h-12 flex items-center justify-center">
-              <p className={`font-serif italic text-lg sm:text-xl md:text-2xl transition-all duration-500 text-center ${
-                mode === 'lovable' 
-                  ? 'text-gray-700' 
-                  : 'text-gray-700'
-              }`}>
-                {heroTexts[currentText]}
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Stats - Adjusted to match container width */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 sm:mb-8 mx-auto">
-            {[
-              { icon: ChefHat, label: 'Expert Chefs', value: '5+' },
-              { icon: Clock, label: 'Years Exp.', value: '7+' },
-              { icon: Star, label: 'Customers', value: '1000+' }
-            ].map((stat, index) => (
-              <div 
-                key={index} 
-                className={`text-center p-2 sm:p-3 rounded-xl ${
-                  mode === 'lovable' 
-                    ? 'bg-white/70 backdrop-blur-sm' 
-                    : 'bg-white/70 backdrop-blur-sm'
-                } hover:scale-105 transition-transform duration-300`}
-              >
-                <stat.icon className={`w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 mx-auto mb-1 ${
-                  mode === 'lovable' ? 'text-pink-600' : 'text-orange-400'
-                }`} />
-                <div className={`text-lg sm:text-xl font-bold ${
-                  mode === 'lovable' ? 'text-gray-800' : 'text-gray-800'
-                }`}>
-                  {stat.value}
-                </div>
-                <div className={`text-xs ${
-                  mode === 'lovable' ? 'text-gray-600' : 'text-gray-600'
-                }`}>
-                  {stat.label}
+                  ? 'bg-white/80 hover:bg-white/90' 
+                  : 'bg-white/80 hover:bg-white/90'
+              } transition-all duration-300 shadow-sm hover:shadow-md`}
+            >
+              <div className="relative w-full h-24 sm:h-28">
+                <img
+                  src={facilityImages.banquet}
+                  alt="Banquet Hall"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                  <Calendar className={`w-8 h-8 ${
+                    mode === 'lovable' ? 'text-purple-100' : 'text-orange-100'
+                  }`} />
                 </div>
               </div>
-            ))}
+              <div className="p-2 w-full">
+                <h3 className={`text-xs sm:text-sm font-bold mb-1 ${
+                  mode === 'lovable' ? 'text-purple-700' : 'text-orange-600'
+                }`}>
+                  Banquet Halls
+                </h3>
+                <p className="text-[10px] sm:text-xs text-gray-700">
+                  Event Spaces
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Bar */}
+            <motion.div 
+              onClick={navigateToBar}
+              whileHover={{ y: -3 }}
+              className={`relative overflow-hidden p-0 rounded-lg backdrop-blur-sm flex flex-col items-center text-center cursor-pointer ${
+                mode === 'lovable' 
+                  ? 'bg-white/80 hover:bg-white/90' 
+                  : 'bg-white/80 hover:bg-white/90'
+              } transition-all duration-300 shadow-sm hover:shadow-md`}
+            >
+              <div className="relative w-full h-24 sm:h-28">
+                <img
+                  src={facilityImages.bar}
+                  alt="Bar"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                  <GlassWater className={`w-8 h-8 ${
+                    mode === 'lovable' ? 'text-purple-100' : 'text-orange-100'
+                  }`} />
+                </div>
+              </div>
+              <div className="p-2 w-full">
+                <h3 className={`text-xs sm:text-sm font-bold mb-1 ${
+                  mode === 'lovable' ? 'text-purple-700' : 'text-orange-600'
+                }`}>
+                  Bar
+                </h3>
+                <p className="text-[10px] sm:text-xs text-gray-700">
+                  Drinks
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Restaurant */}
+            <motion.div 
+              onClick={navigateToRestaurant}
+              whileHover={{ y: -3 }}
+              className={`relative overflow-hidden p-0 rounded-lg backdrop-blur-sm flex flex-col items-center text-center cursor-pointer ${
+                mode === 'lovable' 
+                  ? 'bg-white/80 hover:bg-white/90' 
+                  : 'bg-white/80 hover:bg-white/90'
+              } transition-all duration-300 shadow-sm hover:shadow-md`}
+            >
+              <div className="relative w-full h-24 sm:h-28">
+                <img
+                  src={facilityImages.restaurant}
+                  alt="Restaurant"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                  <Utensils className={`w-8 h-8 ${
+                    mode === 'lovable' ? 'text-purple-100' : 'text-orange-100'
+                  }`} />
+                </div>
+              </div>
+              <div className="p-2 w-full">
+                <h3 className={`text-xs sm:text-sm font-bold mb-1 ${
+                  mode === 'lovable' ? 'text-purple-700' : 'text-orange-600'
+                }`}>
+                  Dining
+                </h3>
+                <p className="text-[10px] sm:text-xs text-gray-700">
+                  Restaurant
+                </p>
+              </div>
+            </motion.div>
           </div>
 
-          {/* CTA Buttons - Adjusted for narrower container */}
+          {/* Delivery Partners Section */}
+<motion.div 
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.3 }}
+  className={`mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg backdrop-blur-sm mx-auto w-fit ${
+    mode === 'lovable' ? 'bg-white/40' : 'bg-white/40'
+  }`}
+>
+  <h3 className={`text-center text-xs sm:text-sm font-bold mb-2 ${
+    mode === 'lovable' 
+      ? 'text-purple-600' 
+      : 'text-orange-600'
+  }`}>
+    Delivery Partners:
+  </h3>
+  <div className="flex justify-center items-center gap-3 sm:gap-5">
+    {deliveryPartners.map((partner, index) => (
+      <motion.div
+        key={index}
+        whileHover={{ scale: 1.05 }}
+       className="w-14 h-14 sm:w-24 sm:h-24 md:w-34 md:h-34 lg:w-50 lg:h-50"
+      >
+        <img 
+          src={partner.logo} 
+          alt={partner.name} 
+          className="h-full w-full object-contain"
+          loading="lazy"
+        />
+      </motion.div>
+    ))}
+  </div>
+</motion.div>
+          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
             <motion.button
               onClick={navigateToMenu}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`group px-4 py-2 sm:px-6 sm:py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`group px-4 py-2 sm:px-6 sm:py-2 rounded-full font-medium transition-all duration-300 ${
                 mode === 'lovable'
                   ? 'bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white'
                   : 'bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white'
-              } shadow-md hover:shadow-lg`}
+              } shadow-md hover:shadow-lg text-xs sm:text-sm`}
             >
               <span className="flex items-center justify-center space-x-1 sm:space-x-2">
-                <span className="text-xs sm:text-sm">Explore Menu</span>
+                <span>Explore Menu</span>
                 <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </motion.button>
@@ -207,14 +293,14 @@ const Hero: React.FC = () => {
               onClick={navigateToContact}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`group px-4 py-2 sm:px-6 sm:py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`group px-4 py-2 sm:px-6 sm:py-2 rounded-full font-medium transition-all duration-300 ${
                 mode === 'lovable'
                   ? 'bg-white text-pink-600 hover:bg-pink-50 border border-pink-200'
                   : 'bg-white/90 text-orange-600 hover:bg-orange-50 border border-orange-200'
-              } shadow-md hover:shadow-lg`}
+              } shadow-md hover:shadow-lg text-xs sm:text-sm`}
             >
               <span className="flex items-center justify-center space-x-1 sm:space-x-2">
-                <span className="text-xs sm:text-sm">Contact Us</span>
+                <span>Contact Us</span>
                 <Mail className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </motion.button>

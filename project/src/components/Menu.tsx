@@ -39,7 +39,7 @@ const Menu: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const menuCategories: MenuCategory[] = [
+   const menuCategories: MenuCategory[] = [
    {
   "name": "Snacks & Chaats",
   "icon": "🥨",
@@ -1925,6 +1925,25 @@ const Menu: React.FC = () => {
   ];
 
 
+  // Delivery partners data
+  const deliveryPartners = [
+    {
+      name: "Uber Eats",
+      logo: "https://wishu.io/wp-content/uploads/2021/09/Uber-Eats-logo-1024x492-1.jpeg",
+      width: 100
+    },
+    {
+      name: "Door Dash",
+      logo: "https://www.pngall.com/wp-content/uploads/15/Door-Dash-Logo-PNG-Images.png",
+      width: 80
+    },
+    {
+      name: "Menu Log",
+      logo: "https://logowik.com/content/uploads/images/menulog7877.jpg",
+      width: 80
+    }
+  ];
+
   const openCategoryPopup = (category: MenuCategory) => {
     setSelectedCategory(category);
     setActiveSubcategory('All');
@@ -1948,21 +1967,26 @@ const Menu: React.FC = () => {
       className="relative rounded-2xl cursor-pointer overflow-hidden group"
       onClick={() => openCategoryPopup(category)}
     >
-      <div className="relative h-48 sm:h-56 md:h-64 w-full">
+      <div className="relative h-40 sm:h-48 md:h-56 w-full">
         <img 
           src={category.image}
           alt={category.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center p-4">
-          <div className="bg-white/90 px-4 py-2 rounded-full mb-2">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-800 text-center">
+          <div className={`bg-white/90 px-3 py-1 rounded-full mb-2 w-full max-w-[90%] ${
+            isMobile ? 'text-center' : ''
+          }`}>
+            <h3 className={`font-bold ${
+              isMobile ? 'text-sm' : 'text-lg sm:text-xl'
+            } text-gray-800 whitespace-nowrap overflow-hidden text-ellipsis`}>
               {category.name}
             </h3>
           </div>
           {isMobile && (
-            <div className="flex items-center bg-white/90 px-3 py-1 rounded-full mt-2">
-              <Hand className="w-4 h-4 mr-1" />
+            <div className="flex items-center bg-white/90 px-2 py-1 rounded-full mt-1">
+              <Hand className="w-3 h-3 mr-1" />
               <span className="text-xs font-medium">Tap to view</span>
             </div>
           )}
@@ -1970,8 +1994,7 @@ const Menu: React.FC = () => {
       </div>
     </motion.div>
   );
-
-  const MenuPopup: React.FC<{ category: MenuCategory }> = ({ category }) => {
+const MenuPopup: React.FC<{ category: MenuCategory }> = ({ category }) => {
     const popupRef = React.useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -2163,7 +2186,7 @@ const Menu: React.FC = () => {
         <motion.img
           src="https://i.postimg.cc/VvgSZGPp/dd.png"
           alt="DosaDelight Logo"
-          className="w-48 h-48 sm:w-48 sm:h-48 md:w-64 md:h-64"
+            className="w-48 h-48 sm:w-50 sm:h-50 md:w-64 md:h-64 lg:w-150 lg:h-150"
           animate={{
             rotate: [0, 10, -10, 0],
             scale: [1, 1.1, 1]
@@ -2175,9 +2198,42 @@ const Menu: React.FC = () => {
           }}
         />
       </motion.div>
+
+      {/* Delivery Partners Section - Added at the top */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        className={`mb-8 mx-auto px-4 w-full max-w-3xl ${
+          mode === 'lovable' ? 'bg-white/40' : 'bg-white/40'
+        } rounded-lg backdrop-blur-sm p-4`}
+      >
+        <h3 className={`text-center text-sm sm:text-base font-bold mb-3 ${
+          mode === 'lovable' ? 'text-purple-600' : 'text-orange-600'
+        }`}>
+          Delivery Partners:
+        </h3>
+        <div className="flex justify-center items-center gap-3 sm:gap-5">
+          {deliveryPartners.map((partner, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.05 }}
+                className="w-14 h-14 sm:w-24 sm:h-24 md:w-34 md:h-34 lg:w-50 lg:h-50"
+            >
+              <img 
+                src={partner.logo} 
+                alt={partner.name} 
+                className="h-full w-full object-contain"
+                loading="lazy"
+              />
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 md:mb-16">
-          <div className={`inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 ${
+        <div className="text-center mb-8 md:mb-12">
+          <div className={`inline-block px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-3 ${
             mode === 'lovable'
               ? 'bg-pink-100 text-pink-800'
               : 'bg-orange-100 text-orange-800'
@@ -2185,10 +2241,10 @@ const Menu: React.FC = () => {
             Our Menu
           </div>
           
-          <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 ${
+          <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4 ${
             mode === 'lovable' ? 'text-gray-800' : 'text-gray-900'
           }`}>
-            Flavors That{' '}
+            <span className="block sm:inline">Flavors That </span>
             <span className={`${
               mode === 'lovable'
                 ? 'text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600'
@@ -2198,28 +2254,28 @@ const Menu: React.FC = () => {
             </span>
           </h2>
           
-          <p className={`text-base md:text-lg max-w-2xl mx-auto ${
+          <p className={`text-sm sm:text-base md:text-lg max-w-2xl mx-auto ${
             mode === 'lovable' ? 'text-gray-600' : 'text-gray-700'
           }`}>
-            Explore our carefully curated menu featuring authentic Indian delicacies, 
-            each dish prepared with love and traditional recipes passed down through generations.
+            Explore our carefully curated menu featuring authentic Indian delicacies.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+        {/* Responsive Category Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 mb-8">
           {menuCategories.map((category: MenuCategory, index: number) => (
             <CategoryCard key={category.name} category={category} index={index} />
           ))}
         </div>
 
-        <div className="text-center mt-12 md:mt-16">
-          <div className={`inline-flex items-center space-x-2 px-4 py-2 md:px-6 md:py-3 rounded-full ${
+        <div className="text-center mt-8 md:mt-12">
+          <div className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full ${
             mode === 'lovable'
               ? 'bg-gradient-to-r from-pink-500 to-purple-600'
               : 'bg-gradient-to-r from-orange-500 to-red-600'
           } text-white shadow-lg hover:scale-105 transition-transform duration-300`}>
-            <ChefHat className="w-4 h-4 md:w-5 md:h-5" />
-            <span className="text-sm md:text-base font-medium">Can't decide? Try our Chef's Special Thali!</span>
+            <ChefHat className="w-4 h-4" />
+            <span className="text-xs sm:text-sm font-medium">Try our Chef's Special Thali!</span>
           </div>
         </div>
       </div>

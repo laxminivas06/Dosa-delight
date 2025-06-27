@@ -27,42 +27,40 @@ const Gallery: React.FC = () => {
       description: 'Our chefs preparing crispy dosas with perfection'
     },
     {
-      url: 'https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&w=800',
+      url: 'https://harispeax.wordpress.com/wp-content/uploads/2021/08/thali.png',
       title: 'Spice Collection',
       description: 'Authentic spices sourced from across India'
     },
     {
-      url: 'https://images.pexels.com/photos/2788792/pexels-photo-2788792.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Traditional Cooking',
-      description: 'Time-honored cooking methods'
+      url: 'https://images.pexels.com/photos/8887011/pexels-photo-8887011.jpeg',
+      title: 'Sweet Treats',
+      description: 'Delicious desserts to end your meal on a sweet note'
     },
     {
-      url: 'https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Colorful Presentation',
-      description: 'Every dish is a work of art'
+      url: 'https://media.istockphoto.com/id/1333127675/photo/chicken-biryani-spicy-indian-malabar-biryani-hyderabadi-biryani-dum-biriyani-pulao-golden.jpg?s=612x612&w=0&k=20&c=cuof8o-8VkdKw2EuDV6XTOFjqQBobiff5ugsBwD4Erg=',
+      title: 'Dum ki Masala',
+      description: 'Slow-cooked biryani with rich flavors'
     },
     {
-      url: 'https://images.pexels.com/photos/1199957/pexels-photo-1199957.jpeg?auto=compress&cs=tinysrgb&w=800',
+      url: 'https://t4.ftcdn.net/jpg/01/58/36/13/360_F_158361356_PsgqLvsirkpM5n9hqCn48rexuB2UWsul.jpg',
       title: 'Fresh Ingredients',
       description: 'Only the finest ingredients make it to your plate'
     },
+    
     {
-      url: 'https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Cozy Ambiance',
-      description: 'Warm and welcoming dining experience'
-    },
-    {
-      url: 'https://images.pexels.com/photos/1833349/pexels-photo-1833349.jpeg?auto=compress&cs=tinysrgb&w=800',
+      url: 'https://media.istockphoto.com/id/1280158821/photo/diverse-keto-dishes.jpg?s=612x612&w=0&k=20&c=V0YSYORJ5rwklY3adnK5K6XU3nhup1NIT_wq8BizJx8=',
+      
       title: 'Happy Customers',
       description: 'Smiles that make our day'
     },
     {
-      url: 'https://images.pexels.com/photos/2696064/pexels-photo-2696064.jpeg?auto=compress&cs=tinysrgb&w=800',
-      title: 'Cultural Heritage',
-      description: 'Celebrating South Indian traditions'
+      url: 'https://t3.ftcdn.net/jpg/08/76/53/94/360_F_876539462_7OSVGDZ2DebHaFztAGcBTEXgOKykjoeH.jpg',
+      title: 'Spices in Every Bite',
+      description: 'Experience the rich flavors of India'
     }
   ];
 
+  /* Commented out stats section
   const stats = [
     { 
       icon: Heart, 
@@ -115,6 +113,7 @@ const Gallery: React.FC = () => {
       }
     }
   ];
+  */
 
   const handleImageLoad = (index: number) => {
     setImageLoaded(prev => ({ ...prev, [index]: true }));
@@ -317,7 +316,7 @@ const Gallery: React.FC = () => {
           </motion.div>
         )}
 
-        {/* Stats */}
+        {/* Commented out stats section
         <div 
           ref={ref}
           className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 text-center"
@@ -372,6 +371,7 @@ const Gallery: React.FC = () => {
             );
           })}
         </div>
+        */}
       </div>
     </section>
   );
