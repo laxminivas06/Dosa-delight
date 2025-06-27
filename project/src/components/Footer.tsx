@@ -132,7 +132,7 @@ const navigateTo = (page: string) => {
             </div>
             
            <p className="text-gray-300 text-base md:text-lg mb-6 leading-relaxed">
-  Dosa Delight is more than just a taste of South India — it’s a celebration of India’s diverse culinary heritage. From soulful spiritual offerings to traditional delicacies across regions, we honor the essence of Indian cuisine in every dish, bringing the full spectrum of flavors from all corners of the country.
+  Dosa Delight is more than just a taste of Indian — it’s a celebration of India’s diverse culinary heritage. From soulful spiritual offerings to traditional delicacies across regions, we honor the essence of Indian cuisine in every dish, bringing the full spectrum of flavors from all corners of the country.
 </p>
             
             <div className="flex justify-center md:justify-start items-center space-x-2 text-gray-300">
