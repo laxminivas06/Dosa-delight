@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Heart, Star } from 'lucide-react';
+import { X,  } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -9,7 +9,7 @@ const Gallery: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [imageLoaded, setImageLoaded] = useState<{ [key: number]: boolean }>({});
   const controls = useAnimation();
-  const [ref, inView] = useInView({
+  const [, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1
   });

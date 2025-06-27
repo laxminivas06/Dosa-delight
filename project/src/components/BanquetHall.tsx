@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Users, Clock, Heart, ChevronRight, MapPin, Phone, Mail, 
-  CheckCircle, Crown, Utensils, Music, Camera, Sparkles, Calendar, Star
+   
+  CheckCircle, Crown, Utensils, Music, Camera, Sparkles, 
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { motion } from 'framer-motion';

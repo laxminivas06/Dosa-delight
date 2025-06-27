@@ -27,10 +27,7 @@ const navigateTo = (page: string) => {
     { icon: Instagram, href: '#', label: 'Instagram' }
   ];
 
-  const scrollToSection = (href: string) => {
-    const element = document.getElementById(href.slice(1));
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
+ 
 
   return (
     <footer className={`relative overflow-hidden ${
