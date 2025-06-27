@@ -267,69 +267,71 @@ const BanquetHall: React.FC = () => {
         </motion.div>
 
         {/* Event Types */}
-        <div className="mb-12 md:mb-16">
-          <h3 className={`text-2xl sm:text-3xl font-bold text-center mb-8 md:mb-12 ${
-            mode === 'lovable' ? 'text-gray-800' : 'text-gray-900'
-          }`}>
-            Perfect for Every Occasion
-          </h3>
-          
-          <div className="lg:grid lg:grid-cols-3 lg:gap-6">
-            {/* Mobile horizontal scroll container */}
-            <div className="flex lg:hidden overflow-x-auto pb-4 -mx-4 px-4">
-              <div className="flex space-x-4">
-                {eventTypes.map((event, index) => (
-                  <motion.div
-                    key={index}
-                    whileHover={{ scale: 1.02 }}
-                    className={`flex-shrink-0 w-[calc(100vw/1.5)] p-4 rounded-xl md:rounded-2xl transition-all duration-300 hover:shadow-lg cursor-pointer ${
-                      mode === 'lovable'
-                        ? 'bg-white border border-pink-100 hover:border-pink-300'
-                        : 'bg-white border border-orange-100 hover:border-orange-300'
-                    }`}
-                  >
-                    <div className="text-3xl sm:text-4xl mb-3 sm:mb-4 text-center">{event.icon}</div>
-                    <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1 sm:mb-2 text-center">
-                      {event.type}
-                    </h4>
-                    <p className="text-xs sm:text-sm text-gray-600 text-center mb-3 sm:mb-4">{event.description}</p>
-                    <div className={`text-xs sm:text-sm text-center ${
-                      mode === 'lovable' ? 'text-pink-600' : 'text-orange-600'
-                    } font-medium`}>
-                      Min. {event.minGuests} guests
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+<div className="mb-12 md:mb-16">
+  <h3 className={`text-2xl sm:text-3xl font-bold text-center mb-8 md:mb-12 ${
+    mode === 'lovable' ? 'text-gray-800' : 'text-gray-900'
+  }`}>
+    Perfect for Every Occasion
+  </h3>
+  
+  <div className="w-full">
+    {/* Mobile horizontal scroll container (unchanged) */}
+    <div className="flex lg:hidden overflow-x-auto pb-4 -mx-4 px-4">
+      <div className="flex space-x-4">
+        {eventTypes.map((event, index) => (
+          <motion.div
+            key={index}
+            whileHover={{ scale: 1.02 }}
+            className={`flex-shrink-0 w-[calc(100vw/1.5)] p-4 rounded-xl md:rounded-2xl transition-all duration-300 hover:shadow-lg cursor-pointer ${
+              mode === 'lovable'
+                ? 'bg-white border border-pink-100 hover:border-pink-300'
+                : 'bg-white border border-orange-100 hover:border-orange-300'
+            }`}
+          >
+            <div className="text-3xl sm:text-4xl mb-3 sm:mb-4 text-center">{event.icon}</div>
+            <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1 sm:mb-2 text-center">
+              {event.type}
+            </h4>
+            <p className="text-xs sm:text-sm text-gray-600 text-center mb-3 sm:mb-4">{event.description}</p>
+            <div className={`text-xs sm:text-sm text-center ${
+              mode === 'lovable' ? 'text-pink-600' : 'text-orange-600'
+            } font-medium`}>
+              Min. {event.minGuests} guests
             </div>
-            
-            {/* Desktop grid (hidden on mobile) */}
-            <div className="hidden lg:grid lg:grid-cols-3 gap-6">
-              {eventTypes.map((event, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.02 }}
-                  className={`p-4 sm:p-6 rounded-xl md:rounded-2xl transition-all duration-300 hover:shadow-lg cursor-pointer ${
-                    mode === 'lovable'
-                      ? 'bg-white border border-pink-100 hover:border-pink-300'
-                      : 'bg-white border border-orange-100 hover:border-orange-300'
-                  }`}
-                >
-                  <div className="text-3xl sm:text-4xl mb-3 sm:mb-4 text-center">{event.icon}</div>
-                  <h4 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1 sm:mb-2 text-center">
-                    {event.type}
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 text-center mb-3 sm:mb-4">{event.description}</p>
-                  <div className={`text-xs sm:text-sm text-center ${
-                    mode === 'lovable' ? 'text-pink-600' : 'text-orange-600'
-                  } font-medium`}>
-                    Min. {event.minGuests} guests
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+    
+    {/* Desktop row (updated) */}
+    <div className="hidden lg:flex justify-center gap-6 px-4">
+      {eventTypes.map((event, index) => (
+        <motion.div
+          key={index}
+          whileHover={{ scale: 1.03 }}
+          className={`flex-1 max-w-xs xl:max-w-sm p-6 rounded-2xl transition-all duration-300 hover:shadow-lg cursor-pointer ${
+            mode === 'lovable'
+              ? 'bg-white border border-pink-100 hover:border-pink-300'
+              : 'bg-white border border-orange-100 hover:border-orange-300'
+          }`}
+        >
+          <div className="text-4xl xl:text-5xl mb-4 text-center">{event.icon}</div>
+          <h4 className="text-xl xl:text-2xl font-semibold text-gray-800 mb-2 text-center">
+            {event.type}
+          </h4>
+          <p className="text-sm xl:text-base text-gray-600 text-center mb-4">{event.description}</p>
+          <div className={`text-sm xl:text-base text-center ${
+            mode === 'lovable' ? 'text-pink-600' : 'text-orange-600'
+          } font-medium`}>
+            Min. {event.minGuests} guests
           </div>
-        </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</div>
+
+       
 
         {/* Features Grid */}
         <div className="mb-12 md:mb-16">
