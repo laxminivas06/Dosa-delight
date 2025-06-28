@@ -82,9 +82,9 @@ const Header: React.FC = () => {
               whileHover={{ scale: 1.05 }}
             >
               <motion.img
-                src="https://i.postimg.cc/VvgSZGPp/dd.png"
+                src="https://i.postimg.cc/gJFh4T6Y/logo-final.png"
                 alt="DosaDelight Logo"
-                className="w-20 h-20 md:w-42 md:h-42"
+                className="w-15 h-20 lg:w-24 lg:h-24"
                 animate={{
                   rotate: [0, 10, -10, 0],
                   scale: [1, 1.1, 1]
