@@ -184,7 +184,7 @@ const navigateTo = (page: string) => {
                 className="flex items-center space-x-3 hover:text-white transition-colors duration-300"
               >
                 <Mail className="w-5 h-5 text-gray-400" />
-                <span className="text-gray-300">dosadelightarrispark@gmail.com</span>
+                <span className="text-gray-300">dosadelight45@gmail.com</span>
               </a>
               
               <a 

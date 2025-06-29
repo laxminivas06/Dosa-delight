@@ -84,7 +84,7 @@ const Header: React.FC = () => {
               <motion.img
                 src="https://i.postimg.cc/gJFh4T6Y/logo-final.png"
                 alt="DosaDelight Logo"
-                className="w-20 h-13 lg:w-24 lg:h-24"
+                className="w-20 h-13 lg:w-22 lg:h-18"
                 animate={{
                   rotate: [0, 10, -10, 0],
                   scale: [1, 1.1, 1]

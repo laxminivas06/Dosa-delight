@@ -2186,7 +2186,7 @@ const MenuPopup: React.FC<{ category: MenuCategory }> = ({ category }) => {
         <motion.img
           src="https://i.postimg.cc/gJFh4T6Y/logo-final.png"
           alt="DosaDelight Logo"
-            className="w-48 h-55 sm:w-50 sm:h-50 md:w-64 md:h-64 lg:w-150 lg:h-150"
+           className="w-48 h-55 sm:w-50 sm:h-57 md:w-64 md:h-71 lg:w-150 lg:h-157"
           animate={{
             rotate: [0, 10, -10, 0],
             scale: [1, 1.1, 1]
