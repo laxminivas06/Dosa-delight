@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Wine, Sparkles, Clock, Star, Plus, Flame, Leaf, X } from 'lucide-react';
+import { Wine, Sparkles, Clock, Star, Plus, Flame, Leaf, X, ChevronDown } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+
 interface DrinkItem {
   name: string;
   price: string;
@@ -21,10 +22,9 @@ interface DrinkCategory {
 
 const BarDrinks: React.FC = () => {
   const { mode } = useTheme();
-  
   const [selectedCategory, setSelectedCategory] = useState<DrinkCategory | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const barImages = [
     'https://images.pexels.com/photos/274192/pexels-photo-274192.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -34,75 +34,116 @@ const BarDrinks: React.FC = () => {
     'https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=800'
   ];
 
-  const decorativeImages = [
-    'https://images.pexels.com/photos/274192/pexels-photo-274192.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/338713/pexels-photo-338713.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/1304540/pexels-photo-1304540.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=400',
-    'https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg?auto=compress&cs=tinysrgb&w=400'
-  ];
-
   const drinkCategories: DrinkCategory[] = [
     {
-      name: 'Signature Cocktails',
-      icon: '🍸',
-      color: 'from-purple-500 to-pink-500',
-      items: [
-        { name: 'DosaDelight Martini', price: '₹450', description: 'Premium vodka with curry leaf essence and lime', isAlcoholic: true, isSignature: true, rating: 4.9 },
-        { name: 'Spice Route Mojito', price: '₹380', description: 'White rum with fresh mint and Indian spices', isAlcoholic: true, isSignature: true, isSpicy: true, rating: 4.8 },
-        { name: 'Mango Tango Margarita', price: '₹420', description: 'Tequila with fresh mango and chili rim', isAlcoholic: true, isSignature: true, rating: 4.7 },
-        { name: 'Coconut Curry Colada', price: '₹400', description: 'Rum with coconut cream and curry leaf', isAlcoholic: true, isSignature: true, rating: 4.6 },
-        { name: 'Tamarind Whiskey Sour', price: '₹480', description: 'Premium whiskey with tamarind and jaggery', isAlcoholic: true, isSignature: true, rating: 4.8 }
-      ]
-    },
-    {
-      name: 'Premium Spirits',
-      icon: '🥃',
-      color: 'from-amber-500 to-orange-500',
-      items: [
-        { name: 'Single Malt Whiskey', price: '₹600', description: '25ml of premium aged single malt', isAlcoholic: true, rating: 4.9 },
-        { name: 'Premium Vodka', price: '₹450', description: 'Top shelf vodka served neat or on rocks', isAlcoholic: true, rating: 4.7 },
-        { name: 'Aged Rum', price: '₹520', description: 'Caribbean aged rum with rich flavor', isAlcoholic: true, rating: 4.8 },
-        { name: 'Premium Gin', price: '₹480', description: 'Botanical gin with juniper notes', isAlcoholic: true, rating: 4.6 },
-        { name: 'Tequila Blanco', price: '₹550', description: 'Pure agave tequila from Mexico', isAlcoholic: true, rating: 4.7 }
-      ]
-    },
-    {
-      name: 'Wine Collection',
-      icon: '🍷',
-      color: 'from-red-500 to-rose-500',
-      items: [
-        { name: 'Cabernet Sauvignon', price: '₹350', description: 'Full-bodied red wine with rich tannins', isAlcoholic: true, rating: 4.8 },
-        { name: 'Chardonnay', price: '₹320', description: 'Crisp white wine with citrus notes', isAlcoholic: true, rating: 4.6 },
-        { name: 'Pinot Noir', price: '₹380', description: 'Light-bodied red with berry flavors', isAlcoholic: true, rating: 4.7 },
-        { name: 'Sauvignon Blanc', price: '₹300', description: 'Fresh white wine with herbal notes', isAlcoholic: true, rating: 4.5 },
-        { name: 'Rosé Wine', price: '₹340', description: 'Light pink wine with floral aroma', isAlcoholic: true, rating: 4.6 }
-      ]
-    },
-    {
-      name: 'Craft Beers',
-      icon: '🍺',
-      color: 'from-yellow-500 to-amber-500',
-      items: [
-        { name: 'IPA (India Pale Ale)', price: '₹280', description: 'Hoppy beer with citrus and pine notes', isAlcoholic: true, rating: 4.7 },
-        { name: 'Wheat Beer', price: '₹250', description: 'Smooth wheat beer with lemon slice', isAlcoholic: true, rating: 4.5 },
-        { name: 'Lager', price: '₹220', description: 'Crisp and refreshing light beer', isAlcoholic: true, rating: 4.4 },
-        { name: 'Stout', price: '₹300', description: 'Dark beer with coffee and chocolate notes', isAlcoholic: true, rating: 4.6 },
-        { name: 'Pilsner', price: '₹240', description: 'Golden beer with floral hop aroma', isAlcoholic: true, rating: 4.5 }
-      ]
-    },
-    {
-      name: 'Non-Alcoholic',
+      name: 'Drinks',
       icon: '🥤',
       color: 'from-green-500 to-blue-500',
       items: [
-        { name: 'Virgin Mojito', price: '₹180', description: 'Fresh mint with lime and soda', rating: 4.6 },
-        { name: 'Fresh Lime Soda', price: '₹120', description: 'Refreshing lime with sparkling water', rating: 4.4 },
-        { name: 'Mango Lassi', price: '₹150', description: 'Creamy yogurt drink with fresh mango', rating: 4.8 },
-        { name: 'Masala Chai', price: '₹80', description: 'Traditional spiced tea blend', isSpicy: true, rating: 4.9 },
-        { name: 'Fresh Coconut Water', price: '₹100', description: 'Natural tender coconut water', rating: 4.5 },
-        { name: 'Iced Coffee', price: '₹140', description: 'Cold brew coffee with ice and cream', rating: 4.6 }
+        { name: 'Masala Tea', price: '$3.99', description: 'Traditional spiced tea blend', isSpicy: true, rating: 4.5 },
+        { name: 'Mango Lassi', price: '$4.99', description: 'Creamy yogurt drink with fresh mango', rating: 4.7 },
+        { name: 'Soft Drinks', price: '$3.99', description: 'Assorted carbonated beverages', rating: 4.2 },
+        { name: 'Ginger Beer', price: '$4.99', description: 'Spicy non-alcoholic ginger beverage', isSpicy: true, rating: 4.4 },
+        { name: 'Fruit Juices', price: '$5.99', description: 'Mango, apple, pineapple, orange, grape', rating: 4.6 }
+      ]
+    },
+    {
+      name: 'Beers',
+      icon: '🍺',
+      color: 'from-yellow-500 to-amber-500',
+      items: [
+        { name: 'Corona', price: '$8.99', description: 'Light, crisp Mexican lager', isAlcoholic: true, rating: 4.5 },
+        { name: 'Kingfisher (KF)', price: '$8.99', description: 'Popular Indian lager', isAlcoholic: true, rating: 4.3 },
+        { name: 'Heineken', price: '$8.99', description: 'Dutch pale lager with a mild bitter taste', isAlcoholic: true, rating: 4.6 },
+        { name: 'Asahi', price: '$8.99', description: 'Japanese super dry lager', isAlcoholic: true, rating: 4.5 },
+        { name: 'Budweiser', price: '$8.99', description: 'Classic American lager', isAlcoholic: true, rating: 4.4 }
+      ]
+    },
+    {
+      name: 'Whisky',
+      icon: '🥃',
+      color: 'from-amber-700 to-amber-900',
+      items: [
+        { name: 'Glenfiddich', price: '$11.99', description: 'Single malt Scotch whisky', isAlcoholic: true, rating: 4.8 },
+        { name: 'Jack Daniels', price: '$8.99', description: 'Tennessee whiskey with smooth finish', isAlcoholic: true, rating: 4.7 },
+        { name: 'Jonnie Walker Red', price: '$7.99', description: 'Blended Scotch whisky', isAlcoholic: true, rating: 4.5 },
+        { name: 'Black Label', price: '$8.99', description: 'Aged blended Scotch whisky', isAlcoholic: true, rating: 4.7 },
+        { name: 'Gold Label', price: '$11.99', description: 'Premium blended Scotch whisky', isAlcoholic: true, rating: 4.8 },
+        { name: 'Chivas Regal', price: '$8.99', description: 'Rich and smooth blended Scotch', isAlcoholic: true, rating: 4.7 },
+        { name: 'Jamson', price: '$8.99', description: 'Irish whiskey with light floral fragrance', isAlcoholic: true, rating: 4.6 },
+        { name: 'Jim Beam', price: '$8.99', description: 'Kentucky straight bourbon whiskey', isAlcoholic: true, rating: 4.5 },
+        { name: 'Makers Mark', price: '$8.99', description: 'Handcrafted Kentucky bourbon', isAlcoholic: true, rating: 4.6 },
+        { name: 'Amrut', price: '$12.99', description: 'Indian single malt whisky', isAlcoholic: true, rating: 4.8 },
+        { name: 'Indri', price: '$11.99', description: 'Award-winning Indian single malt', isAlcoholic: true, rating: 4.8 }
+      ]
+    },
+    {
+      name: 'Vodka',
+      icon: '🍸',
+      color: 'from-red-300 to-red-100',
+      items: [
+        { name: 'Absolute', price: '$8.99', description: 'Swedish premium vodka', isAlcoholic: true, rating: 4.5 },
+        { name: 'Smirnoff', price: '$8.99', description: 'Classic triple distilled vodka', isAlcoholic: true, rating: 4.4 },
+        { name: 'Grey Goose', price: '$8.99', description: 'French luxury vodka', isAlcoholic: true, rating: 4.7 },
+        { name: 'Belvedere', price: '$9.99', description: 'Polish rye vodka, smooth and crisp', isAlcoholic: true, rating: 4.8 },
+        { name: '42 Below', price: '$8.99', description: 'New Zealand vodka, pure and clean', isAlcoholic: true, rating: 4.6 }
+      ]
+    },
+    {
+      name: 'Rum',
+      icon: '🏴‍☠️',
+      color: 'from-amber-700 to-amber-900',
+      items: [
+        { name: 'Bacardi White', price: '$8.99', description: 'Classic white rum from Cuba', isAlcoholic: true, rating: 4.5 },
+        { name: 'Malibu', price: '$8.99', description: 'Caribbean rum with coconut flavor', isAlcoholic: true, rating: 4.4 },
+        { name: 'Old Monk', price: '$8.99', description: 'Iconic Indian dark rum', isAlcoholic: true, rating: 4.6 }
+      ]
+    },
+    {
+      name: 'Mocktails',
+      icon: '🍹',
+      color: 'from-pink-300 to-purple-300',
+      items: [
+        { name: 'Lemon Lime Bitter', price: '$7.99', description: 'Zesty citrus blend with a hint of bitterness', rating: 4.5 },
+        { name: 'Strawberry Daiquiri', price: '$8.99', description: 'Frozen strawberries and lime in a fruity slush', rating: 4.7 },
+        { name: 'Nutella Frappe', price: '$10.99', description: 'Creamy Nutella and ice cream blended together', rating: 4.8 },
+        { name: 'Minty Mess', price: '$9.99', description: 'Mint, lime, and fizz - light and refreshing', rating: 4.6 },
+        { name: 'Melon Surprise', price: '$8.99', description: 'Chilled melon and lime with soda splash', rating: 4.5 },
+        { name: 'Jal Jeera', price: '$7.99', description: 'Spicy-tangy Indian cooler with earthy notes', isSpicy: true, rating: 4.7 },
+        { name: 'Oreo Frappe', price: '$10.99', description: 'Cookies and cream blended into a rich treat', rating: 4.8 },
+        { name: 'Orange & Rose Cooler', price: '$8.99', description: 'Citrus and rose combine for floral refreshment', rating: 4.6 },
+        { name: 'Virgin Pina Colada', price: '$8.99', description: 'Pineapple and coconut in tropical delight', rating: 4.7 },
+        { name: 'Masala Coke', price: '$7.99', description: 'Classic Coke spiced with lemon and masala', isSpicy: true, rating: 4.5 },
+        { name: 'Classic Virgin Mojito', price: '$8.99', description: 'Mint and lime soda - cooling and crisp', rating: 4.6 }
+      ]
+    },
+    {
+      name: 'Cocktails',
+      icon: '🍸',
+      color: 'from-red-500 to-yellow-500',
+      items: [
+        { name: 'Tequila Sunrise', price: '$14.99', description: 'Tequila, orange, and grenadine in vibrant layers', isAlcoholic: true, rating: 4.7 },
+        { name: 'Mojito', price: '$14.99', description: 'Rum, lime, and mint topped with soda', isAlcoholic: true, rating: 4.8 },
+        { name: 'Long Island Iced Tea', price: '$17.99', description: 'Strong mix of spirits with lemon and cola', isAlcoholic: true, rating: 4.6 },
+        { name: 'Watermelon Margarita', price: '$14.99', description: 'Tequila and watermelon shaken together', isAlcoholic: true, rating: 4.7 },
+        { name: 'Espresso Martini', price: '$14.99', description: 'Vodka and espresso shaken into bold lift', isAlcoholic: true, rating: 4.8 },
+        { name: 'Cosmopolita', price: '$14.99', description: 'Cinnamon gin with ginger soda and spices', isAlcoholic: true, isSpicy: true, rating: 4.7 },
+        { name: 'Blue Cloud Sour', price: '$14.99', description: 'Blue vodka, lychee, and coconut blend', isAlcoholic: true, rating: 4.6 },
+        { name: 'Masala Old Fashioned', price: '$14.99', description: 'Whiskey meets Indian spices', isAlcoholic: true, isSpicy: true, rating: 4.8 },
+        { name: 'Orange & Rose Cosmo', price: '$14.99', description: 'Citrus vodka and cranberry with floral touch', isAlcoholic: true, rating: 4.7 },
+        { name: 'Corona Sunrise', price: '$14.99', description: 'Corona, tequila, and orange with grenadine', isAlcoholic: true, rating: 4.6 },
+        { name: 'Moscow Mule', price: '$14.99', description: 'Vodka, lime, and ginger beer in copper mug', isAlcoholic: true, rating: 4.7 }
+      ]
+    },
+    {
+      name: 'Wines',
+      icon: '🍷',
+      color: 'from-purple-700 to-red-700',
+      items: [
+        { name: 'Red Wine (Shiraz) - Glass', price: '$8.99', description: 'Rich and spicy Shiraz red wine by the glass', isAlcoholic: true, rating: 4.6 },
+        { name: 'Red Wine (Shiraz) - Bottle', price: '$45.99', description: 'Full bottle of Shiraz red wine', isAlcoholic: true, rating: 4.6 },
+        { name: 'Merlot - Glass', price: '$8.99', description: 'Smooth and fruity Merlot by the glass', isAlcoholic: true, rating: 4.7 },
+        { name: 'Merlot - Bottle', price: '$45.99', description: 'Full bottle of Merlot red wine', isAlcoholic: true, rating: 4.7 }
       ]
     }
   ];
@@ -114,252 +155,62 @@ const BarDrinks: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const openCategoryPopup = (category: DrinkCategory) => {
-    setSelectedCategory(category);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeCategoryPopup = () => {
-    setSelectedCategory(null);
-    document.body.style.overflow = 'unset';
-  };
-
- 
-
-  const getRandomImages = (count: number) => {
-    const shuffled = [...decorativeImages].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
-  };
-
-  const CategoryCard: React.FC<{ category: DrinkCategory; index: number }> = ({ category, index }) => (
-    <div
-      className={`relative p-6 rounded-2xl cursor-pointer transition-all duration-500 transform hover:scale-105 hover:shadow-xl group bg-gradient-to-br ${category.color} text-white overflow-hidden`}
-      onClick={() => openCategoryPopup(category)}
-      style={{ animationDelay: `${index * 0.1}s` }}
+  const DrinkItemCard: React.FC<{ item: DrinkItem }> = ({ item }) => (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.2 }}
+      className="p-4 rounded-lg border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-300"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-white transform translate-x-8 -translate-y-8"></div>
-        <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-white transform -translate-x-4 translate-y-4"></div>
-      </div>
-      
-      <div className="relative z-10">
-        <div className="text-5xl mb-4 transform group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">
-          {category.icon}
-        </div>
-        
-        <h3 className="text-xl font-bold mb-2">{category.name}</h3>
-        <p className="text-sm opacity-90 mb-4">
-          {category.items.length} premium options
-        </p>
-
-        {/* Special badges */}
-        <div className="flex flex-wrap gap-2">
-          {category.items.some(item => item.isSignature) && (
-            <span className="px-2 py-1 bg-white/20 rounded-full text-xs font-medium">
-              Signature
-            </span>
-          )}
-          {category.items.some(item => item.isAlcoholic) && (
-            <span className="px-2 py-1 bg-white/20 rounded-full text-xs font-medium">
-              21+
-            </span>
-          )}
-        </div>
-      </div>
-
-      {/* Hover particles */}
-      <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute animate-float text-white/40"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 2}s`,
-              animationDuration: '2s'
-            }}
-          >
-            ✨
+      <div className="flex justify-between items-start gap-2">
+        <div>
+          <div className="flex items-center flex-wrap gap-1 mb-1">
+            <h3 className="font-semibold text-gray-800 text-sm sm:text-base">{item.name}</h3>
+            <div className="flex items-center space-x-1">
+              {item.isSignature && <Sparkles className="w-3 h-3 text-purple-600" />}
+              {item.isAlcoholic && <Wine className="w-3 h-3 text-red-500" />}
+              {item.isSpicy && <Flame className="w-3 h-3 text-red-500" />}
+              {!item.isAlcoholic && <Leaf className="w-3 h-3 text-green-600" />}
+            </div>
           </div>
-        ))}
+          
+          <p className="text-gray-600 text-xs sm:text-sm mb-2">{item.description}</p>
+          
+          {item.rating && (
+            <div className="flex items-center space-x-1">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-3 h-3 ${
+                      i < Math.floor(item.rating!) ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-xs text-gray-500">({item.rating})</span>
+            </div>
+          )}
+        </div>
+        <span className={`font-bold text-sm sm:text-base ${
+          mode === 'lovable' ? 'text-pink-600' : 'text-orange-600'
+        }`}>
+          {item.price}
+        </span>
       </div>
-
-      <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-        <Plus className="w-4 h-4" />
-      </div>
-    </div>
+    </motion.div>
   );
 
-  const DrinkPopup: React.FC<{ category: DrinkCategory }> = ({ category }) => {
-    const randomImages = getRandomImages(6);
-    
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-        {/* Decorative Images */}
-        <div className="hidden lg:block absolute inset-0 pointer-events-none overflow-hidden">
-          {randomImages.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt="Decoration"
-              className={`absolute w-24 h-24 rounded-full object-cover opacity-20 animate-float ${
-                index % 2 === 0 ? 'rounded-2xl' : 'rounded-full'
-              }`}
-              style={{
-                left: index < 3 ? `${10 + index * 5}%` : `${70 + (index - 3) * 10}%`,
-                top: index < 3 ? `${20 + index * 20}%` : `${30 + (index - 3) * 25}%`,
-                animationDelay: `${index * 0.5}s`,
-                width: `${20 + Math.random() * 16}px`,
-                height: `${20 + Math.random() * 16}px`
-              }}
-            />
-          ))}
-        </div>
-
-        <div className={`relative w-full max-w-4xl h-[90vh] overflow-hidden rounded-3xl shadow-2xl bg-white flex flex-col`}>
-          
-          {/* Header */}
-          <div className={`flex-shrink-0 p-4 md:p-6 border-b bg-gradient-to-r ${category.color} text-white`}>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <span className="text-3xl md:text-4xl">{category.icon}</span>
-                <div>
-                  <h3 className="text-xl md:text-2xl font-bold">{category.name}</h3>
-                  <p className="text-sm opacity-90">{category.items.length} items available</p>
-                </div>
-              </div>
-              
-              <button
-                onClick={closeCategoryPopup}
-                className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-300 hover:scale-110"
-              >
-                <X className="w-5 h-5 md:w-6 md:h-6" />
-              </button>
-            </div>
-          </div>
-
-          {/* Items */}
-          <div className="flex-1 overflow-y-auto p-4 md:p-6">
-            <div className="grid gap-4 md:gap-6">
-              {category.items.map((item, index) => (
-                <div
-                  key={index}
-                  className={`p-4 md:p-6 rounded-xl border transition-all duration-300 hover:shadow-lg cursor-pointer ${
-                    hoveredItem === `${category.name}-${index}`
-                      ? 'border-orange-300 bg-orange-50 scale-102 shadow-md'
-                      : 'border-gray-200 hover:border-gray-300 bg-white'
-                  }`}
-                  onMouseEnter={() => setHoveredItem(`${category.name}-${index}`)}
-                  onMouseLeave={() => setHoveredItem(null)}
-                >
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-3">
-                    <div className="flex-1">
-                      <div className="flex items-center flex-wrap gap-2 mb-2">
-                        <h4 className="font-semibold text-gray-800 text-lg">{item.name}</h4>
-                        <div className="flex items-center space-x-1">
-                          {item.isSignature && (
-                            <div className="flex items-center space-x-1">
-                              <Sparkles className="w-4 h-4 text-purple-600" />
-                              <span className="text-xs text-purple-600 font-medium">SIGNATURE</span>
-                            </div>
-                          )}
-                          {item.isAlcoholic && (
-                            <div className="flex items-center space-x-1">
-                              <Wine className="w-4 h-4 text-red-500" />
-                              <span className="text-xs text-red-500 font-medium">21+</span>
-                            </div>
-                          )}
-                          {item.isSpicy && (
-                            <div className="flex items-center space-x-1">
-                              <Flame className="w-4 h-4 text-red-500" />
-                              <span className="text-xs text-red-500 font-medium">SPICY</span>
-                            </div>
-                          )}
-                          {!item.isAlcoholic && (
-                            <div className="flex items-center space-x-1">
-                              <Leaf className="w-4 h-4 text-green-600" />
-                              <span className="text-xs text-green-600 font-medium">NON-ALCOHOLIC</span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      
-                      <p className="text-gray-600 text-sm md:text-base mb-3 leading-relaxed">
-                        {item.description}
-                      </p>
-                      
-                      {item.rating && (
-                        <div className="flex items-center space-x-2 mb-2">
-                          <div className="flex">
-                            {[...Array(5)].map((_, i) => (
-                              <Star
-                                key={i}
-                                className={`w-4 h-4 ${
-                                  i < Math.floor(item.rating!)
-                                    ? 'text-yellow-400 fill-current'
-                                    : 'text-gray-300'
-                                }`}
-                              />
-                            ))}
-                          </div>
-                          <span className="text-sm text-gray-500">({item.rating})</span>
-                        </div>
-                      )}
-                    </div>
-                    
-                    <div className="flex items-center justify-between md:flex-col md:items-end gap-3">
-                      <span className={`font-bold text-xl md:text-2xl ${
-                        mode === 'lovable' ? 'text-pink-600' : 'text-orange-600'
-                      }`}>
-                        {item.price}
-                      </span>
-                      
-                     
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   return (
-    <section id="bar" className={`py-20 ${
+    <section id="bar" className={`py-8 sm:py-12 ${
       mode === 'lovable'
         ? 'bg-gradient-to-b from-purple-50 to-pink-50'
         : 'bg-gradient-to-b from-gray-50 to-white'
     }`}>
-       {/* Logo Animation */}
-             <motion.div
-       initial={{ opacity: 0, y: -50 }}
-       animate={{ opacity: 1, y: 0 }}
-       transition={{ duration: 0.8, type: 'spring' }}
-       className="mb-8 flex justify-center"
-     >
-       <motion.img
-         src="https://i.postimg.cc/gJFh4T6Y/logo-final.png"
-            alt="DosaDelight Logo"
-            className="w-48 h-55 sm:w-50 sm:h-57 md:w-64 md:h-71 lg:w-150 lg:h-157"
-         animate={{
-           rotate: [0, 10, -10, 0],
-           scale: [1, 1.1, 1]
-         }}
-         transition={{
-           duration: 10000,
-           repeat: Infinity,
-           repeatType: 'reverse'
-         }}
-       />
-     </motion.div>
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className={`inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 ${
+        <div className="text-center mb-8 sm:mb-12">
+          <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-3 ${
             mode === 'lovable'
               ? 'bg-pink-100 text-pink-800'
               : 'bg-orange-100 text-orange-800'
@@ -367,7 +218,7 @@ const BarDrinks: React.FC = () => {
             Bar & Drinks
           </div>
           
-          <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${
+          <h2 className={`text-2xl sm:text-3xl font-bold mb-3 ${
             mode === 'lovable' ? 'text-gray-800' : 'text-gray-900'
           }`}>
             Raise Your{' '}
@@ -380,17 +231,16 @@ const BarDrinks: React.FC = () => {
             </span>
           </h2>
           
-          <p className={`text-lg max-w-3xl mx-auto ${
+          <p className={`text-sm sm:text-base max-w-3xl mx-auto ${
             mode === 'lovable' ? 'text-gray-600' : 'text-gray-700'
           }`}>
-            From signature cocktails crafted with Indian spices to premium spirits and refreshing 
-            non-alcoholic beverages, discover the perfect drink to complement your dining experience.
+            From signature cocktails to premium spirits and refreshing beverages
           </p>
         </div>
 
         {/* Hero Image Slider */}
-        <div className="relative mb-16">
-          <div className="relative h-96 md:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+        <div className="relative mb-6 sm:mb-10">
+          <div className="relative h-48 sm:h-80 rounded-xl overflow-hidden shadow-lg">
             {barImages.map((image, index) => (
               <img
                 key={index}
@@ -403,116 +253,168 @@ const BarDrinks: React.FC = () => {
             ))}
             
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <div className="text-center text-white">
-                <Wine className="w-16 h-16 mx-auto mb-4 text-yellow-400" />
-                <h3 className="text-3xl md:text-4xl font-bold mb-2">Premium Bar Experience</h3>
-                <p className="text-lg md:text-xl">Crafted Cocktails & Fine Spirits</p>
+              <div className="text-center text-white px-4">
+                <Wine className="w-10 h-10 mx-auto mb-2 text-yellow-400" />
+                <h3 className="text-xl sm:text-2xl font-bold">Premium Bar Experience</h3>
               </div>
-            </div>
-
-            {/* Floating Particles */}
-            <div className="absolute inset-0 pointer-events-none">
-              {[...Array(15)].map((_, i) => (
-                <div
-                  key={i}
-                  className={`absolute animate-float ${
-                    mode === 'lovable' ? 'text-pink-300' : 'text-yellow-300'
-                  }`}
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animationDelay: `${Math.random() * 3}s`,
-                    animationDuration: `${3 + Math.random() * 2}s`
-                  }}
-                >
-                  ✨
-                </div>
-              ))}
             </div>
           </div>
 
-          <div className="flex justify-center space-x-2 mt-6">
+          <div className="flex justify-center space-x-2 mt-3">
             {barImages.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentImageIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 rounded-full transition-all ${
                   index === currentImageIndex
                     ? mode === 'lovable'
                       ? 'bg-pink-500 scale-125'
                       : 'bg-orange-500 scale-125'
-                    : 'bg-gray-300 hover:bg-gray-400'
+                    : 'bg-gray-300'
                 }`}
               />
             ))}
           </div>
         </div>
         
-{/* Age Restriction Notice */}
-<div className={`text-center mt-16 mb-12 p-6 rounded-2xl ${  // Added mb-12 for bottom gap
-  mode === 'lovable'
-    ? 'bg-pink-100 border border-pink-200'
-    : 'bg-orange-100 border border-orange-200'
-}`}>
-  <Wine className={`w-8 h-8 mx-auto mb-3 ${
-    mode === 'lovable' ? 'text-pink-600' : 'text-orange-600'
-  }`} />
-  <p className="text-gray-700 font-medium">
-    <strong>Please Note:</strong> Alcoholic beverages are served only to guests above 21 years of age. 
-    Valid ID required. We promote responsible drinking.
-  </p>
-</div>
-
-
-{/* Features */}
-<div className="flex flex-nowrap md:flex-row justify-between gap-4 sm:gap-6 md:gap-8 mb-16 px-4 md:px-0">  {/* Increased base gap to gap-4 */}
-  {[
-    { icon: Clock, title: 'Happy Hours', desc: '4:00 PM - 7:00 PM Daily', color: 'text-blue-600' },
-    { icon: Star, title: 'Expert Bartenders', desc: 'Crafted by certified mixologists', color: 'text-yellow-600' },
-    { icon: Sparkles, title: 'Premium Quality', desc: 'Only the finest spirits & ingredients', color: 'text-purple-600' }
-  ].map((feature, index) => (
-    <div
-      key={index}
-      className={`flex-shrink-0 w-full max-w-[calc(33.33%-10px)] text-center p-4 sm:p-5 md:p-6 rounded-2xl transition-all duration-300 hover:scale-105 ${  // Increased p-4 base padding
-        mode === 'lovable'
-          ? 'bg-white shadow-md hover:shadow-lg border border-pink-100'
-          : 'bg-white shadow-md hover:shadow-lg border border-orange-100'
-      }`}
-    >
-      <feature.icon className={`w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-3 sm:mb-4 ${feature.color}`} />  {/* Slightly larger base icon */}
-      <h4 className="font-semibold text-gray-800 text-sm md:text-base mb-2">{feature.title}</h4>  {/* Unified text-sm base size */}
-      <p className="text-xs sm:text-sm text-gray-600">{feature.desc}</p>
-    </div>
-  ))}
-</div>
-
-
-
-      {/* Category Grid - Always 3 per row, no scroll */}
-<div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6 mb-8">
-  {drinkCategories.map((category, index) => (
-    <CategoryCard key={category.name} category={category} index={index} />
-  ))}
-</div>
-
-        {/* Age Restriction Notice */}
-        <div className={`text-center mt-16 p-6 rounded-2xl ${
+        {/* Age Notice */}
+        <div className={`text-center mb-6 p-3 rounded-lg ${
           mode === 'lovable'
             ? 'bg-pink-100 border border-pink-200'
             : 'bg-orange-100 border border-orange-200'
         }`}>
-          <Wine className={`w-8 h-8 mx-auto mb-3 ${
+          <Wine className={`w-5 h-5 mx-auto mb-1 ${
             mode === 'lovable' ? 'text-pink-600' : 'text-orange-600'
           }`} />
-          <p className="text-gray-700 font-medium">
-            <strong>Please Note:</strong> Alcoholic beverages are served only to guests above 21 years of age. 
-            Valid ID required. We promote responsible drinking.
+          <p className="text-xs sm:text-sm text-gray-700">
+            <strong>Note:</strong> Alcohol served only to guests 21+. Valid ID required.
           </p>
         </div>
-      </div>
 
-      {/* Drink Popup */}
-      {selectedCategory && <DrinkPopup category={selectedCategory} />}
+        {/* Features */}
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 sm:mb-8">
+          {[
+            { icon: Clock, title: 'Happy Hours', desc: '4-7PM Daily', color: 'text-blue-600' },
+            { icon: Star, title: 'Expert Mixologists', color: 'text-yellow-600' },
+            { icon: Sparkles, title: 'Premium Quality', color: 'text-purple-600' }
+          ].map((feature, index) => (
+            <div
+              key={index}
+              className={`p-2 sm:p-3 rounded-lg text-center ${
+                mode === 'lovable'
+                  ? 'bg-white shadow-sm border border-pink-100'
+                  : 'bg-white shadow-sm border border-orange-100'
+              }`}
+            >
+              <feature.icon className={`w-5 h-5 mx-auto mb-1 ${feature.color}`} />
+              <h4 className="font-medium text-gray-800 text-xs sm:text-sm">{feature.title}</h4>
+              {feature.desc && <p className="text-xs text-gray-600">{feature.desc}</p>}
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile Category Selector */}
+        <div className="sm:hidden mb-4 relative">
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className={`w-full flex justify-between items-center p-3 rounded-lg ${
+              mode === 'lovable'
+                ? 'bg-pink-100 text-pink-800'
+                : 'bg-orange-100 text-orange-800'
+            }`}
+          >
+            <span>{selectedCategory ? selectedCategory.name : 'Select a Category'}</span>
+            <ChevronDown className={`w-4 h-4 transition-transform ${isMobileMenuOpen ? 'rotate-180' : ''}`} />
+          </button>
+          
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="absolute z-10 w-full mt-1 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden"
+              >
+                {drinkCategories.map((category) => (
+                  <div
+                    key={category.name}
+                    className="p-3 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 cursor-pointer"
+                    onClick={() => {
+                      setSelectedCategory(category);
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <span className="text-lg">{category.icon}</span>
+                      <span>{category.name}</span>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Main Content Area */}
+        <div className="flex flex-col">
+          {/* Category Cards Grid - Shown when no category is selected */}
+          {!selectedCategory && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4"
+            >
+              {drinkCategories.map((category, index) => (
+                <motion.div
+                  key={category.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`relative p-3 rounded-lg cursor-pointer transition-all duration-300 hover:shadow-md group bg-gradient-to-br ${category.color} text-white`}
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="text-2xl mb-1">{category.icon}</div>
+                    <h3 className="text-sm font-medium">{category.name}</h3>
+                    <p className="text-xs opacity-80 mt-1">{category.items.length} items</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+
+          {/* Drink Items - Shown when a category is selected */}
+          {selectedCategory && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="w-full"
+            >
+              <div className={`flex items-center justify-between mb-4 p-4 rounded-xl bg-gradient-to-r ${selectedCategory.color} text-white`}>
+                <div className="flex items-center space-x-3">
+                  <span className="text-2xl">{selectedCategory.icon}</span>
+                  <h2 className="text-xl font-bold">{selectedCategory.name}</h2>
+                </div>
+                <button
+                  onClick={() => setSelectedCategory(null)}
+                  className="p-1 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                {selectedCategory.items.map((item, index) => (
+                  <DrinkItemCard key={index} item={item} />
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </div>
+      </div>
     </section>
   );
 };
