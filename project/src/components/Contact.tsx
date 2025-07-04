@@ -55,7 +55,7 @@ const contactInfo = [
     {
       icon: Mail,
       title: 'Email Us',
-      details: ['dosadelight45@gmail.com'],
+      details: ['dosadelightharrispark@gmail.com'],
       action: 'mailto:dosadelightarrispark@gmail.com'
     },
     {
