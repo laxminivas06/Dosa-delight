@@ -35,7 +35,26 @@ const Menu: React.FC<MenuProps> = ({ mode = 'default', isMobile = false }) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState<number | null>(null);
   const itemsContainerRef = useRef<HTMLDivElement>(null);
 
-   const menuCategories: MenuCategory[] = [
+  // Delivery partners data
+  const deliveryPartners = [
+    {
+      name: "Uber Eats",
+      logo: "https://wishu.io/wp-content/uploads/2021/09/Uber-Eats-logo-1024x492-1.jpeg",
+      width: 100
+    },
+    {
+      name: "Door Dash",
+      logo: "https://www.pngall.com/wp-content/uploads/15/Door-Dash-Logo-PNG-Images.png",
+      width: 80
+    },
+    {
+      name: "Menu Log",
+      logo: "https://logowik.com/content/uploads/images/menulog7877.jpg",
+      width: 80
+    }
+  ];
+
+const menuCategories: MenuCategory[] = [
    {
   "name": "Snacks & Chaats",
   "icon": "🥨",
@@ -1920,18 +1939,9 @@ const Menu: React.FC<MenuProps> = ({ mode = 'default', isMobile = false }) => {
     
   ];
 
-  const deliveryPartners: DeliveryPartner[] = [
-    {
-      name: "Uber Eats",
-      logo: "https://wishu.io/wp-content/uploads/2021/09/Uber-Eats-logo-1024x492-1.jpeg",
-      width: 100
-    },
-    // ... other delivery partners
-  ];
 
   const openCategory = (index: number) => {
     setSelectedCategoryIndex(index);
-    // Scroll to top when opening a category
     setTimeout(() => {
       if (itemsContainerRef.current) {
         itemsContainerRef.current.scrollTop = 0;
@@ -1990,10 +2000,90 @@ const Menu: React.FC<MenuProps> = ({ mode = 'default', isMobile = false }) => {
         ? 'bg-gradient-to-b from-purple-50 to-pink-50'
         : 'bg-gradient-to-b from-white to-gray-50'
     }`}>
-      {/* Logo and Delivery Partners sections remain the same */}
+      {/* Logo Animation */}
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, type: 'spring' }}
+        className="mb-8 flex justify-center"
+      >
+        <motion.img
+          src="https://i.postimg.cc/gJFh4T6Y/logo-final.png"
+          alt="DosaDelight Logo"
+          className="w-48 h-auto sm:w-50 md:w-64"
+          animate={{
+            rotate: [0, 10, -10, 0],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{
+            duration: 100000000000009090583085639869386935860,
+            repeat: Infinity,
+            repeatType: 'reverse'
+          }}
+        />
+      </motion.div>
+
+      {/* Delivery Partners Section */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        className={`mb-8 mx-auto px-4 w-full max-w-3xl ${
+          mode === 'lovable' ? 'bg-white/40' : 'bg-white/40'
+        } rounded-lg backdrop-blur-sm p-4`}
+      >
+        <h3 className={`text-center text-sm sm:text-base font-bold mb-3 ${
+          mode === 'lovable' ? 'text-purple-600' : 'text-orange-600'
+        }`}>
+          Available on:
+        </h3>
+        <div className="flex justify-center items-center gap-4 sm:gap-6">
+          {deliveryPartners.map((partner, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.05 }}
+              className="h-10 sm:h-12"
+            >
+              <img 
+                src={partner.logo} 
+                alt={partner.name}
+                className="h-full w-auto object-contain"
+                loading="lazy"
+              />
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
 
       <div className="container mx-auto px-4">
-        {/* Header section remains the same */}
+        <div className="text-center mb-8 md:mb-12">
+          <div className={`inline-block px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-3 ${
+            mode === 'lovable'
+              ? 'bg-pink-100 text-pink-800'
+              : 'bg-orange-100 text-orange-800'
+          }`}>
+            Our Menu
+          </div>
+          
+          <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4 ${
+            mode === 'lovable' ? 'text-gray-800' : 'text-gray-900'
+          }`}>
+            <span className="block sm:inline">Flavors That </span>
+            <span className={`${
+              mode === 'lovable'
+                ? 'text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600'
+                : 'text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600'
+            }`}>
+              Speak to Your Soul
+            </span>
+          </h2>
+          
+          <p className={`text-sm sm:text-base md:text-lg max-w-2xl mx-auto ${
+            mode === 'lovable' ? 'text-gray-600' : 'text-gray-700'
+          }`}>
+            Explore our carefully curated menu featuring authentic Indian delicacies.
+          </p>
+        </div>
 
         {/* Category Grid */}
         {selectedCategoryIndex === null && (
