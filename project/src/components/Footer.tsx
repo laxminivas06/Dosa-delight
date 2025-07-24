@@ -188,7 +188,7 @@ const navigateTo = (page: string) => {
               </a>
               
               <a 
-                href="https://www.google.com/maps/search/?api=1&query=GO6/31+LASSO+ROAD+GREGORY+HILLS+NSW+2557" 
+                href="https://maps.app.goo.gl/WuBeYXojqjh3qdfHA" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-start space-x-3 hover:text-white transition-colors duration-300"

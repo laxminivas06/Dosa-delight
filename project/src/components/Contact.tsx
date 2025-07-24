@@ -62,7 +62,7 @@ const contactInfo = [
       icon: MapPin,
       title: 'Visit Us',
       details: ['48 station street, Harris park, NSW 2150'],
-      action: 'https://maps.app.goo.gl/F4JYisPix85r4hqe7'
+      action: 'https://maps.app.goo.gl/WuBeYXojqjh3qdfHA'
     },
     {
       icon: Clock,
