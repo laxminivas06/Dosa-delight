@@ -385,7 +385,7 @@ const contactInfo = [
               className="rounded-xl sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg"
             >
               <a 
-                href="https://maps.app.goo.gl/F4JYisPix85r4hqe7" 
+                href="https://maps.app.goo.gl/WuBeYXojqjh3qdfHA" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="h-48 sm:h-64 w-full flex items-center justify-center"
